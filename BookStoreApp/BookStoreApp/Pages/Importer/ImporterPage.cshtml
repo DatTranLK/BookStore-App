@@ -1,0 +1,11 @@
+﻿@page
+@model BookStoreApp.Pages.Importer.ImporterPageModel
+@{
+}
+@if (@Model.Role == "2")
+{
+    <h1>Welcome @Model.Username With Role is Importer</h1>
+}
+else{
+    <p>You do not have permission to access</p>
+}

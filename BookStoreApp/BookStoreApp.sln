@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStoreApp", "BookStoreApp\BookStoreApp.csproj", "{ED20802A-9649-4FD9-9F91-2EBBB5A71312}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStoreApp", "BookStoreApp\BookStoreApp.csproj", "{ED20802A-9649-4FD9-9F91-2EBBB5A71312}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessObject", "BusinessObject\BusinessObject.csproj", "{302E6562-350C-4096-9113-C9904CFEC258}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessObject", "BusinessObject\BusinessObject.csproj", "{302E6562-350C-4096-9113-C9904CFEC258}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessObject", "DataAccessObject\DataAccessObject.csproj", "{184A85B2-6F7B-4C3E-ADE9-C5F8DDF81FD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessObject", "DataAccessObject\DataAccessObject.csproj", "{184A85B2-6F7B-4C3E-ADE9-C5F8DDF81FD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{CE0E906D-A14B-414A-96E1-AD4460B62C91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{CE0E906D-A14B-414A-96E1-AD4460B62C91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

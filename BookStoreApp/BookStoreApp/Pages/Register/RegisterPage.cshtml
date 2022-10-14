@@ -1,0 +1,30 @@
+﻿@page
+@model BookStoreApp.Pages.Register.RegisterPageModel
+@{
+}
+<h2>If you do not have account, Please register in here</h2>
+<p>Enter your details below</p>
+@if (@Model.Msg != null)
+{
+    <p style="color: red">@Model.Msg</p>    
+}
+<form method="post" asp-page="RegisterPage">
+    <table>
+        <tr>
+            <td>Username</td>
+            <td><input type="text" asp-for="@Model.Account.Username" /></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" asp-for="@Model.Account.Password" /></td>
+        </tr>
+        <tr>
+            <td>Confirm Password</td>
+            <td><input type="password" asp-for="@Model.ConfirmPassword" /></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" class="btn btn-primary" value="Register" /></td>
+        </tr>
+    </table>
+</form>

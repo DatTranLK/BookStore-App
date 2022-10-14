@@ -27,7 +27,7 @@ namespace BusinessObject.Models
         public string Address { get; set; }
 
         public virtual Role Role { get; set; }
-        public virtual Store Store { get; set; }
+        public virtual Store? Store { get; set; }
         public virtual ICollection<Order> OrderCustomers { get; set; }
         public virtual ICollection<Order> OrderStaffs { get; set; }
         public virtual ICollection<RequestBook> RequestBooks { get; set; }

@@ -1,0 +1,11 @@
+﻿@page
+@model BookStoreApp.Pages.Customer.CustomerPageModel
+@{
+}
+@if (@Model.Role == "4")
+{
+    <h1>Welcome @Model.Username With Role is Customer</h1>
+}
+else{
+    <p>You do not have permission to access</p>
+}

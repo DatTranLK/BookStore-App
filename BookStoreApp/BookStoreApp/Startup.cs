@@ -1,3 +1,4 @@
+using BookStoreApp.ValidationHandling;
 using BusinessObject.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -5,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PRN221_SE1503_A2_TranThanhDat.ValidationHandling;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +27,12 @@ namespace BookStoreApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BookStoreDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddDbContext<BookStoreDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSession();
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<LoginValidation>();
+            services.AddScoped<RegisterValidation>();
+
             services.AddRazorPages();
         }
 
@@ -40,6 +48,7 @@ namespace BookStoreApp
                 app.UseExceptionHandler("/Error");
             }
 
+            app.UseSession();
             app.UseStaticFiles();
 
             app.UseRouting();

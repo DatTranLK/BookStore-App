@@ -1,0 +1,26 @@
+﻿@page
+@model BookStoreApp.Pages.Login.LoginPageModel
+@{
+}
+<h2>Please log in here</h2>
+<p>Enter your details below</p>
+@if (@Model.Msg != null)
+{
+    <p style="color: red">@Model.Msg</p>    
+}
+<form method="post" asp-page="LoginPage">
+    <table>
+        <tr>
+            <td>Username</td>
+            <td><input type="text" asp-for="@Model.Username" /></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" asp-for="@Model.Password" /></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" class="btn btn-primary" value="Login" /></td>
+        </tr>
+    </table>
+</form>
