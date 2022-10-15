@@ -54,7 +54,7 @@ namespace BookStoreApp.Pages.Login
                 {
                     HttpContext.Session.SetString("Username", Username);
                     HttpContext.Session.SetString("Role", account.RoleId.ToString());
-                    return RedirectToPage("/Customer/CustomerPage");
+                    return RedirectToPage("/Index");
                 }
                 
             }
