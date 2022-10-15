@@ -1,8 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Http
 @{
-    if (Context.Session.GetString("Role") == "1" || Context.Session.GetString("Role") == "2")
+    if (Context.Session.GetString("Role") == "1")
     {
-        Layout = null;
+        Layout = "_LayoutAdminPage";
+    }
+    else if (Context.Session.GetString("Role") == "2")
+    {
+        Layout = "_LayoutImporterPage";
     }
     else
     {
