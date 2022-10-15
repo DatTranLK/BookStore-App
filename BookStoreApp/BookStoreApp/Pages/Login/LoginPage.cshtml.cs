@@ -1,8 +1,8 @@
-using BookStoreApp.ValidationHandling;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repository;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace BookStoreApp.Pages.Login
@@ -10,60 +10,60 @@ namespace BookStoreApp.Pages.Login
     public class LoginPageModel : PageModel
     {
         private readonly IAccountRepository _accountRepository;
-        private readonly LoginValidation _loginValidation;
 
         [BindProperty]
+        [Required]
         public string Username { get; set; }
         [BindProperty]
+        [Required]
         public string Password { get; set; }
-        public string Msg { get; set; }
         public string Role { get; set; }
-        public LoginPageModel(IAccountRepository accountRepository, LoginValidation loginValidation)
+        public LoginPageModel(IAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
-            _loginValidation = loginValidation;
+         
         }
         public void OnGet()
         {
 
         }
         public async Task<IActionResult> OnPost()
-        { 
-            var validate = _loginValidation.CheckValidationLoginForm(Username, Password);
-            if (validate != "ok")
-            {
-                Msg = validate;
-                return Page();
-            }
+        {
             var account = _accountRepository.CheckLogin(Username, Password);
-            if (account != null && account.RoleId == 1)
+            if (account != null)
             {
-                HttpContext.Session.SetString("Username", Username);
-                HttpContext.Session.SetString("Role", account.RoleId.ToString());
-                return RedirectToPage("/Admin/AdminPage");
+                if(account.RoleId == 1)
+                {
+                    HttpContext.Session.SetString("Username", Username);
+                    HttpContext.Session.SetString("Role", account.RoleId.ToString());
+                    return RedirectToPage("/Admin/AdminPage");
+                }
+                if ( account.RoleId == 2)
+                {
+                    HttpContext.Session.SetString("Username", Username);
+                    HttpContext.Session.SetString("Role", account.RoleId.ToString());
+                    return RedirectToPage("/Importer/ImporterPage");
+                }
+                if (account.RoleId == 3)
+                {
+                    HttpContext.Session.SetString("Username", Username);
+                    HttpContext.Session.SetString("Role", account.RoleId.ToString());
+                    return RedirectToPage("/Seller/SellerPage");
+                }
+                 if (account.RoleId == 4)
+                {
+                    HttpContext.Session.SetString("Username", Username);
+                    HttpContext.Session.SetString("Role", account.RoleId.ToString());
+                    return RedirectToPage("/Customer/CustomerPage");
+                }
+                
             }
-            else if (account != null && account.RoleId == 2)
+            else
             {
-                HttpContext.Session.SetString("Username", Username);
-                HttpContext.Session.SetString("Role", account.RoleId.ToString());
-                return RedirectToPage("/Importer/ImporterPage");
-            }
-            else if (account != null && account.RoleId == 3)
-            {
-                HttpContext.Session.SetString("Username", Username);
-                HttpContext.Session.SetString("Role", account.RoleId.ToString());
-                return RedirectToPage("/Seller/SellerPage");
-            }
-            else if (account != null && account.RoleId == 4)
-            {
-                HttpContext.Session.SetString("Username", Username);
-                HttpContext.Session.SetString("Role", account.RoleId.ToString());
-                return RedirectToPage("/Index");
-            }
-            else {
-                Msg = "Username or password are not correct, Please enter again";
+                ViewData["ErrorMessage"] = "Invalid email or password.";
                 return Page();
             }
+
             return Page();
         }
     }

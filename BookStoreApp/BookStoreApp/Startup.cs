@@ -1,4 +1,3 @@
-using BookStoreApp.ValidationHandling;
 using BusinessObject.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PRN221_SE1503_A2_TranThanhDat.ValidationHandling;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -30,8 +28,6 @@ namespace BookStoreApp
             services.AddDbContext<BookStoreDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSession();
             services.AddScoped<IAccountRepository, AccountRepository>();
-            services.AddScoped<LoginValidation>();
-            services.AddScoped<RegisterValidation>();
 
             services.AddRazorPages();
         }

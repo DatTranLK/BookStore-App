@@ -31,10 +31,16 @@ namespace DataAccessObject
         {
             try
             {
-                var account = _dBContext.Accounts.FirstOrDefault(x => x.Username == username && x.Password == password);
-                if (account != null)
+                if(!string.IsNullOrEmpty(username) || !string.IsNullOrEmpty(password))
                 {
-                    return account;
+                    username = username.Trim();
+                    password = password.Trim();
+                    var account = _dBContext.Accounts.FirstOrDefault(x => x.Username == username && x.Password == password);
+                    if (account != null)
+                    {
+                        return account;
+                    }
+                    return null;
                 }
                 return null;
             }

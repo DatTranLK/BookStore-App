@@ -2,7 +2,6 @@ using BusinessObject.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using PRN221_SE1503_A2_TranThanhDat.ValidationHandling;
 using Repository;
 using System.Threading.Tasks;
 
@@ -10,7 +9,6 @@ namespace BookStoreApp.Pages.Register
 {
     public class RegisterPageModel : PageModel
     {
-        private readonly RegisterValidation _registerValidation;
         private readonly IAccountRepository _accountRepository;
 
         public string Username { get; set; }
@@ -21,9 +19,8 @@ namespace BookStoreApp.Pages.Register
         public Account Account { get; set; }
         [BindProperty]
         public string ConfirmPassword { get; set; }
-        public RegisterPageModel(RegisterValidation registerValidation, IAccountRepository accountRepository)
+        public RegisterPageModel(IAccountRepository accountRepository)
         {
-            _registerValidation = registerValidation;
             _accountRepository = accountRepository;
         }
         public void OnGet()
@@ -32,13 +29,8 @@ namespace BookStoreApp.Pages.Register
             Role = HttpContext.Session.GetString("Role");
         }
         public async Task<IActionResult> OnPost()
-        { 
-            var validate = _registerValidation.CheckRegisterValidation(Account);
-            if (validate != "ok")
-            {
-                Msg = validate;
-                return Page();
-            }
+        {
+        
             if (string.IsNullOrEmpty(ConfirmPassword))
             {
                 Msg = "Please enter Confirm password field";
