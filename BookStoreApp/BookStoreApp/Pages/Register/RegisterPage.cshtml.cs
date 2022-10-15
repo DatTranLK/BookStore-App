@@ -50,7 +50,7 @@ namespace BookStoreApp.Pages.Register
             _accountRepository.Register(Account);
             HttpContext.Session.SetString("Username", Account.Username);
             HttpContext.Session.SetString("Role", Account.RoleId.ToString());
-            return RedirectToPage("/Customer/CustomerPage");
+            return RedirectToPage("/Index");
         }
     }
 }
