@@ -34,25 +34,25 @@ namespace BookStoreApp.Pages.Login
             {
                 if(account.RoleId == 1)
                 {
-                    HttpContext.Session.SetString("Username", Username);
+                    HttpContext.Session.SetString("Username", account.Username);
                     HttpContext.Session.SetString("Role", account.RoleId.ToString());
                     return RedirectToPage("/Admin/AdminPage");
                 }
                 if ( account.RoleId == 2)
                 {
-                    HttpContext.Session.SetString("Username", Username);
+                    HttpContext.Session.SetString("Username", account.Username);
                     HttpContext.Session.SetString("Role", account.RoleId.ToString());
                     return RedirectToPage("/Importer/ImporterPage");
                 }
                 if (account.RoleId == 3)
                 {
-                    HttpContext.Session.SetString("Username", Username);
+                    HttpContext.Session.SetString("Username", account.Username);
                     HttpContext.Session.SetString("Role", account.RoleId.ToString());
                     return RedirectToPage("/Seller/SellerPage");
                 }
                  if (account.RoleId == 4)
                 {
-                    HttpContext.Session.SetString("Username", Username);
+                    HttpContext.Session.SetString("Username", account.Username);
                     HttpContext.Session.SetString("Role", account.RoleId.ToString());
                     return RedirectToPage("/Index");
                 }
