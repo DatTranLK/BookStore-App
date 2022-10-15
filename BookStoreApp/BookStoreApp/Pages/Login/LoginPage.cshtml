@@ -1,26 +1,58 @@
 ﻿@page
 @model BookStoreApp.Pages.Login.LoginPageModel
+@using Microsoft.AspNetCore.Http
+
 @{
+	Layout = "";
 }
-<h2>Please log in here</h2>
-<p>Enter your details below</p>
-@if (@Model.Msg != null)
-{
-    <p style="color: red">@Model.Msg</p>    
-}
-<form method="post" asp-page="LoginPage">
-    <table>
-        <tr>
-            <td>Username</td>
-            <td><input type="text" asp-for="@Model.Username" /></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="password" asp-for="@Model.Password" /></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td><input type="submit" class="btn btn-primary" value="Login" /></td>
-        </tr>
-    </table>
-</form>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - BookStoreApp</title>
+	<link href="~/css/login.css" rel="stylesheet" />
+</head>
+<div class="container1">
+	<div class="screen">
+		<div class="screen__content">
+			<form class="login" method="post" asp-page="LoginPage">
+				<h2 style="padding-left:22px">LOGIN</h2>
+				@if (ViewBag.ErrorMessage != null)
+				{
+					<div class="alert alert-danger text-center" role="alert">
+						@ViewBag.ErrorMessage
+					</div>
+				}
+				<div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+					<input type="text" class="login__input" placeholder="Username" asp-for="Username">
+					<br />
+					<span asp-validation-for="Username" style="color: red"></span>
+				</div>
+				<div class="login__field">
+					<i class="login__icon fas fa-lock"></i>
+					<input type="password" class="login__input" placeholder="Password" asp-for="Password">
+					<br />
+					<span asp-validation-for="Password" style="color: red"></span>
+				</div>
+				
+				<button class="button login__submit" value="Login" type="submit">
+					<span class="button__text">Login</span>
+					<i class="button__icon fas fa-chevron-right"></i>
+				</button>
+				<div style="padding : 10px">
+					<a asp-page="/Register/RegisterPage"> Register here</a>
+				</div>
+				
+			</form>
+		</div>
+		<div class="screen__background">
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>		
+			<span class="screen__background__shape screen__background__shape2"></span>
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>		
+	</div>
+</div>
+
+
