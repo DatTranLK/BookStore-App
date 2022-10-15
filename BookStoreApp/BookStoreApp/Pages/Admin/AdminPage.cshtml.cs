@@ -1,17 +1,27 @@
+using BusinessObject.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Repository;
 
 namespace BookStoreApp.Pages.Admin
 {
     public class AdminPageModel : PageModel
     {
+        private readonly IAccountRepository _accountRepository;
+
         public string Username { get; set; }
         public string Role { get; set; }
+        public AdminPageModel(IAccountRepository accountRepository)
+        {
+            _accountRepository = accountRepository;
+        }
+        public Account Account { get; set; }
         public void OnGet()
         {
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
+            Account = _accountRepository.GetAccountByUsername(Username);
         }
         public IActionResult OnGetLogout()
         {
