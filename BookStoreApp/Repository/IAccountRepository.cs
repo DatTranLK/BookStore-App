@@ -12,5 +12,10 @@ namespace Repository
         Account CheckLogin(string username, string password);
         void Register(Account account);
         Account GetAccountByUsername(string username);
+        List<Account> GetAccounts();
+        Account GetAccountById(int id);
+        void RemoveAccount(int id);
+        void CreateNewAccount(Account account);
+        void UpdateAccount(Account account);
     }
 }
