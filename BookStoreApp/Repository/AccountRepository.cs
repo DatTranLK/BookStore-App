@@ -12,8 +12,18 @@ namespace Repository
     {
         public Account CheckLogin(string username, string password) => AccountDAO.Instance.CheckLogin(username, password);
 
+        public void CreateNewAccount(Account account) => AccountDAO.Instance.CreateNewAccount(account);
+
+        public Account GetAccountById(int id) => AccountDAO.Instance.GetAccountById(id);
+
         public Account GetAccountByUsername(string username) => AccountDAO.Instance.GetAccountByUsername(username);
 
+        public List<Account> GetAccounts() => AccountDAO.Instance.GetAccounts();
+
         public void Register(Account account) => AccountDAO.Instance.Register(account);
+
+        public void RemoveAccount(int id) => AccountDAO.Instance.RemoveAccount(id);
+
+        public void UpdateAccount(Account account) => AccountDAO.Instance.UpdateAccount(account);
     }
 }

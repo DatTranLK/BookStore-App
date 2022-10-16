@@ -1,5 +1,7 @@
 ﻿using BusinessObject.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DataAccessObject
@@ -74,6 +76,102 @@ namespace DataAccessObject
                     return acc;
                 }
                 return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+        public List<Account> GetAccounts()
+        {
+            try
+            {
+                var accounts = _dBContext.Accounts
+                    .Include(x => x.Role)
+                    .Include(x => x.Store)
+                    .OrderByDescending(x => x.Id)
+                    .ToList();
+                if (accounts != null)
+                {
+                    return accounts;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+
+        }
+        public Account GetAccountById(int id)
+        {
+            try
+            {
+                var acc = _dBContext.Accounts
+                    .Include(x => x.Role)
+                    .Include(x => x.Store)
+                    .FirstOrDefault(x => x.Id == id);
+                if (acc != null)
+                {
+                    return acc;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+        public void RemoveAccount(int id)
+        {
+            try
+            {
+                var acc = _dBContext.Accounts.FirstOrDefault(x => x.Id == id);
+                if (acc != null)
+                {
+                    if (acc.IsActive == true)
+                    {
+                        acc.IsActive = false;
+                        _dBContext.SaveChanges();
+                    }
+                    else if(acc.IsActive == false)
+                    {
+                        acc.IsActive = true;
+                        _dBContext.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+        public void CreateNewAccount(Account account)
+        {
+            try
+            {
+                account.IsActive = true;
+                _dBContext.Accounts.Add(account);
+                _dBContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+        public void UpdateAccount(Account account)
+        {
+            try
+            {
+                account.IsActive = true;
+                _dBContext.ChangeTracker.Clear();
+                _dBContext.Entry<Account>(account).State = EntityState.Modified;
+                _dBContext.SaveChanges();
             }
             catch (Exception ex)
             {
