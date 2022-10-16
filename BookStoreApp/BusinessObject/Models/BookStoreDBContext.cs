@@ -89,6 +89,8 @@ namespace BusinessObject.Models
 
                 entity.Property(e => e.Name).HasMaxLength(200);
 
+                entity.Property(e => e.Price).HasColumnType("money");
+
                 entity.Property(e => e.ReleaseYear)
                     .HasMaxLength(4)
                     .IsUnicode(false)

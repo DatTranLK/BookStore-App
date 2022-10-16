@@ -11,5 +11,8 @@ namespace Repository
     {
         List<Book> GetBooks();
         Book GetBookById(int id);
+        void RemoveBook(int id);
+        void CreateNewBook(Book book);
+        void UpdateBook(Book book);
     }
 }

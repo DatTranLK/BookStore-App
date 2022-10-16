@@ -1,5 +1,5 @@
 ﻿@page
-@model BookStoreApp.Pages.Admin.BookPage.DetailsModel
+@model BookStoreApp.Pages.Admin.BookPage.DeleteModel
 @{
 }
 @if (@Model.Role == "1")
@@ -84,10 +84,11 @@
             </dd>
         </dl>
     </div>
-    <div>
-        <a asp-page="./Edit" asp-route-id="@Model.Book.Id">Edit</a> |
+    <form method="post">
+        <input type="hidden" asp-for="Book.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-page="./Index">Back to List</a>
-    </div>
+    </form>
 }
 else{
     Response.Redirect("/Login/LoginPage");
