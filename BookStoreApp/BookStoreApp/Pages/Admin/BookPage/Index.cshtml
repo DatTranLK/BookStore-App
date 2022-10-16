@@ -1,0 +1,94 @@
+﻿@page
+@using Microsoft.AspNetCore.Http
+@model BookStoreApp.Pages.Admin.BookPage.IndexModel
+@{
+}
+
+@if (@Model.Role == "1")
+{
+    if(@Model.Msg != null)
+    {
+        <p style="color: red">@Model.Msg</p>
+    }
+    <h1>Book</h1>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Book[0].Isbn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Book[0].Name)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.Book[0].Author)
+                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Book[0].ReleaseYear)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Book[0].Version)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Book[0].IsActive)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Book[0].Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Book[0].Category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Book[0].Publisher)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="list-wrapper">
+    @foreach (var item in Model.Book) {
+            <tr class="list-item">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Isbn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReleaseYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Version)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Publisher.Name)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id"><i class='fas fa-pen'></i></a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id"><i class='fas fa-info'></i></a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id"><i class='fas fa-trash'></i></a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+    <p>
+        <a class="btn btn-primary" asp-page="Create">Create New</a>
+    </p>
+    <div id="pagination-container"></div>
+}
+else{
+    Response.Redirect("/Login/LoginPage");
+}

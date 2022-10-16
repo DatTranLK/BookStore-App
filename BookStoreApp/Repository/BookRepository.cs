@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessObject.Models;
+using DataAccessObject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,8 @@ namespace Repository
 {
     public class BookRepository : IBookRepository
     {
+        public Book GetBookById(int id) => BookDAO.Instance.GetBookById(id);
+
+        public List<Book> GetBooks() => BookDAO.Instance.GetBooks();
     }
 }

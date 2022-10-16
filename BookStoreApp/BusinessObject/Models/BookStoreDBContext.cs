@@ -81,6 +81,8 @@ namespace BusinessObject.Models
 
                 entity.Property(e => e.Author).HasMaxLength(100);
 
+                entity.Property(e => e.Avatar).HasColumnType("ntext");
+
                 entity.Property(e => e.Isbn)
                     .HasMaxLength(20)
                     .HasColumnName("ISBN");

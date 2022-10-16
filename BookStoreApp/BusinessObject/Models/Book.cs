@@ -24,6 +24,7 @@ namespace BusinessObject.Models
         public int? Amount { get; set; }
         public int? CategoryId { get; set; }
         public int? PublisherId { get; set; }
+        public string Avatar { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual Publisher Publisher { get; set; }

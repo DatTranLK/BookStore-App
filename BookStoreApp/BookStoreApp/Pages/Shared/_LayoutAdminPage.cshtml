@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>J.F.F Admin - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -20,7 +20,34 @@
 
     <!-- Custom styles for this template-->
     <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        .page{
+            padding:0px 10px;
+        }
+        .pagination{
+  
+          padding:20px;
+  
+          &,
+          *{
+            user-select: none;
+          }
+  
+          a{
+            display:inline-block;
+            padding:0 10px;
+            cursor:pointer;
+            &.disabled{
+              opacity:.3;
+              pointer-events: none;
+            cursor:not-allowed;
+            }
+            &.current{
+              background:#f3f3f3;
+            }
+          }
+    </style>
 </head>
 
 <body id="page-top">
@@ -32,7 +59,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-page="/Admin/BookPage/Index">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -52,8 +79,8 @@
             <div class="sidebar-heading">
                 Admin
             </div>
-            <li class="nav-item active">
-                <a class="nav-link" asp-page="/Admin/AdminPage">
+            <li class="nav-item">
+                <a class="nav-link" asp-page="/Admin/BookPage/Index">
                     <i class="fas fa-fw fa-book"></i>
                     <span>Books</span></a>
             </li>
@@ -207,11 +234,11 @@
 
                     <!-- Content Row -->
                     <div class="row">
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        @*<div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Books</h1>
-                            @*<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>*@
-                        </div>
+                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        </div>*@
                         @RenderBody()
                     </div>
 
@@ -241,27 +268,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Bootstrap core JavaScript-->
     <script src="~/vendor/jquery/jquery.min.js"></script>
     <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -278,6 +284,127 @@
     <!-- Page level custom scripts -->
     <script src="~/js/demo/chart-area-demo.js"></script>
     <script src="~/js/demo/chart-pie-demo.js"></script>
+    <script>
+        (function($) {
+	        var pagify = {
+		        items: {},
+		        container: null,
+		        totalPages: 1,
+		        perPage: 3,
+		        currentPage: 0,
+		        createNavigation: function() {
+			        this.totalPages = Math.ceil(this.items.length / this.perPage);
+
+			        $('.pagination', this.container.parent()).remove();
+			        var pagination = $('<div class="pagination"></div>').append('<a class="nav prev disabled" data-next="false"><</a>');
+
+			        for (var i = 0; i < this.totalPages; i++) {
+				        var pageElClass = "page";
+				        if (!i)
+					        pageElClass = "page current";
+				        var pageEl = '<a class="' + pageElClass + '" data-page="' + (
+				        i + 1) + '">' + (
+				        i + 1) + "</a>";
+				        pagination.append(pageEl);
+			        }
+			        pagination.append('<a class="nav next" data-next="true">></a>');
+
+			        this.container.after(pagination);
+
+			        var that = this;
+			        $("body").off("click", ".nav");
+			        this.navigator = $("body").on("click", ".nav", function() {
+				        var el = $(this);
+				        that.navigate(el.data("next"));
+			        });
+
+			        $("body").off("click", ".page");
+			        this.pageNavigator = $("body").on("click", ".page", function() {
+				        var el = $(this);
+				        that.goToPage(el.data("page"));
+			        });
+		        },
+		        navigate: function(next) {
+			        // default perPage to 5
+			        if (isNaN(next) || next === undefined) {
+				        next = true;
+			        }
+			        $(".pagination .nav").removeClass("disabled");
+			        if (next) {
+				        this.currentPage++;
+				        if (this.currentPage > (this.totalPages - 1))
+					        this.currentPage = (this.totalPages - 1);
+				        if (this.currentPage == (this.totalPages - 1))
+					        $(".pagination .nav.next").addClass("disabled");
+				        }
+			        else {
+				        this.currentPage--;
+				        if (this.currentPage < 0)
+					        this.currentPage = 0;
+				        if (this.currentPage == 0)
+					        $(".pagination .nav.prev").addClass("disabled");
+				        }
+
+			        this.showItems();
+		        },
+		        updateNavigation: function() {
+
+			        var pages = $(".pagination .page");
+			        pages.removeClass("current");
+			        $('.pagination .page[data-page="' + (
+			        this.currentPage + 1) + '"]').addClass("current");
+		        },
+		        goToPage: function(page) {
+
+			        this.currentPage = page - 1;
+
+			        $(".pagination .nav").removeClass("disabled");
+			        if (this.currentPage == (this.totalPages - 1))
+				        $(".pagination .nav.next").addClass("disabled");
+
+			        if (this.currentPage == 0)
+				        $(".pagination .nav.prev").addClass("disabled");
+			        this.showItems();
+		        },
+		        showItems: function() {
+			        this.items.hide();
+			        var base = this.perPage * this.currentPage;
+			        this.items.slice(base, base + this.perPage).show();
+
+			        this.updateNavigation();
+		        },
+		        init: function(container, items, perPage) {
+			        this.container = container;
+			        this.currentPage = 0;
+			        this.totalPages = 1;
+			        this.perPage = perPage;
+			        this.items = items;
+			        this.createNavigation();
+			        this.showItems();
+		        }
+	        };
+
+	        // stuff it all into a jQuery method!
+	        $.fn.pagify = function(perPage, itemSelector) {
+		        var el = $(this);
+		        var items = $(itemSelector, el);
+
+		        // default perPage to 5
+		        if (isNaN(perPage) || perPage === undefined) {
+			        perPage = 3;
+		        }
+
+		        // don't fire if fewer items than perPage
+		        if (items.length <= perPage) {
+			        return true;
+		        }
+
+		        pagify.init(el, items, perPage);
+	        };
+        })(jQuery);
+
+        $(".list-wrapper").pagify(10, ".list-item");
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

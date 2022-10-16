@@ -1,4 +1,5 @@
 ﻿using BusinessObject.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,11 @@ namespace DataAccessObject
         {
             try
             {
-                var books = _dbContext.Books.ToList();
+                var books = _dbContext.Books
+                    .Include(x => x.Category)
+                    .Include(x => x.Publisher)
+                    .OrderByDescending(x => x.Id)
+                    .ToList();
                 if (books != null)
                 {
                     return books;
@@ -43,6 +48,26 @@ namespace DataAccessObject
             }
             catch (Exception ex)
             {
+                throw new Exception(ex.Message);
+            }
+        }
+        public Book GetBookById(int id)
+        {
+            try
+            {
+                var book = _dbContext.Books
+                    .Include(x => x.Category)
+                    .Include(x => x.Publisher)
+                    .FirstOrDefault(x => x.Id == id);
+                if (book != null)
+                {
+                    return book;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
                 throw new Exception(ex.Message);
             }
         }
