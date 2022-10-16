@@ -29,6 +29,8 @@ namespace BookStoreApp
             services.AddSession();
             services.AddScoped<IAccountRepository, AccountRepository>();
 
+            services.AddScoped<IBookRepository, BookRepository>();
+
             services.AddRazorPages();
         }
 
