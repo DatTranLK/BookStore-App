@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessObject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,7 @@ namespace Repository
 {
     public interface IBookRepository
     {
+        List<Book> GetBooks();
+        Book GetBookById(int id);
     }
 }

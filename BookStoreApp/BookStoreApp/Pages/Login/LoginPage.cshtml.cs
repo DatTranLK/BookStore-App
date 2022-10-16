@@ -36,7 +36,7 @@ namespace BookStoreApp.Pages.Login
                 {
                     HttpContext.Session.SetString("Username", account.Username);
                     HttpContext.Session.SetString("Role", account.RoleId.ToString());
-                    return RedirectToPage("/Admin/AdminPage");
+                    return RedirectToPage("/Admin/BookPage/Index");
                 }
                 if ( account.RoleId == 2)
                 {
