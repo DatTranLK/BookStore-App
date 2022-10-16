@@ -10,8 +10,14 @@ namespace Repository
 {
     public class BookRepository : IBookRepository
     {
+        public void CreateNewBook(Book book) => BookDAO.Instance.CreateNewBook(book);
+
         public Book GetBookById(int id) => BookDAO.Instance.GetBookById(id);
 
         public List<Book> GetBooks() => BookDAO.Instance.GetBooks();
+
+        public void RemoveBook(int id) => BookDAO.Instance.RemoveBook(id);
+
+        public void UpdateBook(Book book) => BookDAO.Instance.UpdateBook(book);
     }
 }

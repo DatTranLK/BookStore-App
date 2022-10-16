@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace DataAccessObject
 {
     public class BookDAO
@@ -64,6 +65,61 @@ namespace DataAccessObject
                     return book;
                 }
                 return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+        public void RemoveBook(int id)
+        {
+            try
+            {
+                var book = _dbContext.Books.FirstOrDefault(x => x.Id == id);
+                if (book != null)
+                {
+                    if (book.IsActive == true)
+                    {
+                        book.IsActive = false;
+                        _dbContext.SaveChanges();
+                    }
+                    else if (book.IsActive == false)
+                    {
+                        book.IsActive = true;
+                        _dbContext.SaveChanges();
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+        public void CreateNewBook(Book book)
+        {
+            try
+            {
+                book.IsActive = true;
+                _dbContext.Books.Add(book);
+                _dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+        public void UpdateBook(Book book)
+        {
+            try
+            {
+                book.IsActive = true;
+                _dbContext.ChangeTracker.Clear();
+                _dbContext.Entry<Book>(book).State = EntityState.Modified;
+                _dbContext.SaveChanges();
             }
             catch (Exception ex)
             {
