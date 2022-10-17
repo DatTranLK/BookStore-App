@@ -33,6 +33,8 @@ namespace BookStoreApp
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
 
+            services.AddScoped<IPublisherRepository, PublisherRepository>();
+
             services.AddRazorPages();
         }
 
