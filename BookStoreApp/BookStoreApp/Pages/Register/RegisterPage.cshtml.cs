@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repository;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace BookStoreApp.Pages.Register
@@ -11,46 +13,43 @@ namespace BookStoreApp.Pages.Register
     {
         private readonly IAccountRepository _accountRepository;
 
+        [BindProperty]
+        [Required]
         public string Username { get; set; }
-        public string Role { get; set; }
-        public string Msg { get; set; }
-
         [BindProperty]
-        public Account Account { get; set; }
+        [Required]
+        public string Password { get; set; }
         [BindProperty]
+        [Required]
+        [Compare("Password")]
         public string ConfirmPassword { get; set; }
         public RegisterPageModel(IAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
         }
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            Username = HttpContext.Session.GetString("Username");
-            Role = HttpContext.Session.GetString("Role");
+            return Page();
         }
-        public async Task<IActionResult> OnPost()
+
+        public IActionResult OnPost()
         {
-        
-            if (string.IsNullOrEmpty(ConfirmPassword))
-            {
-                Msg = "Please enter Confirm password field";
-                return Page();
-            }
-            if (!Account.Password.Equals(ConfirmPassword))
-            {
-                Msg = "Confirm Password must match Password";
-                return Page();
-            }
-            var checkExist = _accountRepository.GetAccountByUsername(Account.Username);
+            var checkExist = _accountRepository.GetAccountByUsername(Username);
             if (checkExist != null)
             {
-                Msg = "The username has existed, Please enter new username";
+                ViewData["ErrorMessage"] = "The username has existed, Please enter new username";
                 return Page();
             }
-            _accountRepository.Register(Account);
-            HttpContext.Session.SetString("Username", Account.Username);
-            HttpContext.Session.SetString("Role", Account.RoleId.ToString());
-            return RedirectToPage("/Index");
+            Account currentAccount = _accountRepository.Register(new Account(Username,Password));
+
+            if(currentAccount != null)
+            {
+                HttpContext.Session.SetString("Username", currentAccount.Username);
+                HttpContext.Session.SetString("Role", currentAccount.RoleId.ToString());
+                return RedirectToPage("/Index");
+            }
+            return Page();
+
         }
     }
 }

@@ -38,11 +38,12 @@ CREATE TABLE [dbo].[Book](
 	[ReleaseYear] [char](4) NULL,
 	[Version] [int] NULL,
 	[IsActive] [bit] NULL,
-	[Amount] [int] NULL,
+	[Amount] [int] NULL, 
 	[CategoryId] [int] NULL,
 	[PublisherId] [int] NULL,
 	[Avatar] [ntext] NULL,
 	[Price] [money] NULL,
+	[Description] [ntext] null,
  CONSTRAINT [PK_Book] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -58,6 +59,7 @@ CREATE TABLE [dbo].[BookInStore](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[BookId] [int] NULL,
 	[StoreId] [int] NULL,
+	[Amount] [int] NULL,
  CONSTRAINT [PK_BookInStore] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -106,7 +108,7 @@ GO
 CREATE TABLE [dbo].[OrderDetail](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[OrderId] [int] NULL,
-	[BookId] [int] NULL,
+	[BookInStoreId] [int] NULL,
 	[Quantity] [int] NULL,
  CONSTRAINT [PK_OrderDetail] PRIMARY KEY CLUSTERED 
 (
@@ -291,8 +293,8 @@ REFERENCES [dbo].[Account] ([Id])
 GO
 ALTER TABLE [dbo].[Order] CHECK CONSTRAINT [FK_Order_Staff]
 GO
-ALTER TABLE [dbo].[OrderDetail]  WITH CHECK ADD  CONSTRAINT [FK_OrderDetail_Book] FOREIGN KEY([BookId])
-REFERENCES [dbo].[Book] ([Id])
+ALTER TABLE [dbo].[OrderDetail]  WITH CHECK ADD  CONSTRAINT [FK_OrderDetail_Book] FOREIGN KEY([BookInStoreId])
+REFERENCES [dbo].[BookInStore] ([Id])
 GO
 ALTER TABLE [dbo].[OrderDetail] CHECK CONSTRAINT [FK_OrderDetail_Book]
 GO

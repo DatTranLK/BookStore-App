@@ -18,27 +18,27 @@
 				<h2 style="padding-left: 10px">REGISTRATION</h2>
 				@if (ViewBag.ErrorMessage != null)
 				{
-					<div class="alert alert-danger text-center" role="alert">
+					<div style="color: red">
 						@ViewBag.ErrorMessage
 					</div>
 				}
 				<div class="login__field">
 					<i class="login__icon fas fa-user"></i>
-					<input type="text" class="login__input" placeholder="Username" asp-for="@Model.Account.Username">
+					<input type="text" class="login__input form-control" placeholder="Username" asp-for="Username">
 					<br />
-					<span asp-validation-for="@Model.Account.Username" style="color: red"></span>
+					<span asp-validation-for="Username" style="color: red"></span>
 				</div>
 				<div class="login__field">
 					<i class="login__icon fas fa-lock"></i>
-					<input type="password" class="login__input" placeholder="Password" asp-for="@Model.Account.Password">
+					<input type="password" class="login__input form-control" placeholder="Password" asp-for="Password">
 					<br />
-					<span asp-validation-for="@Model.Account.Password" style="color: red"></span>
+					<span asp-validation-for="Password" style="color: red"></span>
 				</div>
 				<div class="login__field">
 					<i class="login__icon fas fa-lock"></i>
-					<input type="password" class="login__input" placeholder="Confirm Password" asp-for="@Model.ConfirmPassword">
+					<input type="password" class="login__input form-control" placeholder="Confirm Password" asp-for="ConfirmPassword">
 					<br />
-					<span asp-validation-for="@Model.ConfirmPassword" style="color: red"></span>
+					<span asp-validation-for="ConfirmPassword" style="color: red"></span>
 				</div>
 
 				<button class="button login__submit" value="Register" type="submit" >

@@ -10,7 +10,7 @@ namespace Repository
     public interface IAccountRepository
     {
         Account CheckLogin(string username, string password);
-        void Register(Account account);
+        Account Register(Account account);
         Account GetAccountByUsername(string username);
         List<Account> GetAccounts();
         Account GetAccountById(int id);

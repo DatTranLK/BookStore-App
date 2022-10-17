@@ -51,14 +51,20 @@ namespace DataAccessObject
                 throw new Exception(ex.Message);
             }
         }
-        public void Register(Account account)
+        public Account Register(Account account)
         {
             try
             {
-                account.RoleId = 4;
-                account.IsActive = true;
-                _dBContext.Accounts.Add(account);
-                _dBContext.SaveChanges();
+                if(String.IsNullOrEmpty(account.Username) && String.IsNullOrEmpty(account.Password))
+                {
+                    account.RoleId = 4;
+                    account.IsActive = true;
+                    _dBContext.Accounts.Add(account);
+                    _dBContext.SaveChanges();
+                    return GetAccountByUsername(account.Username);
+                }
+                return null;
+               
             }
             catch (Exception ex)
             {
@@ -70,11 +76,15 @@ namespace DataAccessObject
         {
             try
             {
-                var acc = _dBContext.Accounts.FirstOrDefault(x => x.Username == username);
-                if (acc != null)
+                if (String.IsNullOrEmpty(username))
                 {
-                    return acc;
+                    var acc = _dBContext.Accounts.FirstOrDefault(x => x.Username == username.Trim());
+                    if (acc != null)
+                    {
+                        return acc;
+                    }
                 }
+                
                 return null;
             }
             catch (Exception ex)
