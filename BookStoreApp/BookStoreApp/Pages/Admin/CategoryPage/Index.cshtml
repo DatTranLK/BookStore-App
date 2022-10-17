@@ -1,0 +1,56 @@
+﻿@page
+@model BookStoreApp.Pages.Admin.CategoryPage.IndexModel
+@{
+}
+@if(@Model.Role == "1")
+{
+if(@Model.Msg != null)
+{
+    <p style="color: red">@Model.Msg</p>
+}
+<h1>Category</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category[0].Description)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="list-wrapper">
+@foreach (var item in Model.Category) {
+        <tr class="list-item">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td></td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id"><i class='fas fa-pen'></i></a>  
+            </td>
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.Id"><i class='fas fa-info'></i></a>
+            </td>
+            <td>
+                <a asp-page="./Delete" asp-route-id="@item.Id"><i class='fas fa-trash'></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<p>
+    <a class="btn btn-primary" asp-page="Create">Create New</a>
+</p>
+<div id="pagination-container"></div>
+}
+else{
+    Response.Redirect("/Login/LoginPage");
+}
