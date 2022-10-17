@@ -127,5 +127,17 @@ namespace DataAccessObject
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<Book> GetBooksInStore()
+        {
+            var list = _dbContext.Books.ToList();
+            if (list != null)
+            {
+                return list;
+            }
+            return null;
+        }
+
+
     }
 }
