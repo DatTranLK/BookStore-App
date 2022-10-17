@@ -14,5 +14,6 @@ namespace Repository
         void RemoveBook(int id);
         void CreateNewBook(Book book);
         void UpdateBook(Book book);
+        List<Book> GetBooksInStore();
     }
 }

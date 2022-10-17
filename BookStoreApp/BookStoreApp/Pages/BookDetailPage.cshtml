@@ -1,0 +1,43 @@
+﻿@page
+@model BookStoreApp.Pages.BookDetailPageModel
+@{
+    ViewData["Title"] = "Book Detail page";
+}
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/css/style2.css">
+    <div class="main-wrapper">
+        <div class="container">
+            <div class="product-div">
+                <div class="product-div-left">
+                    <div class="img-container">
+                        <img src="@Model.Book.Avatar" alt="watch">
+                    </div>
+                </div>
+                <div class="product-div-right">
+                    <span class="product-name">@Model.Book.Name</span>
+                    <span class="product-price">@Model.Book.Price VNĐ</span>
+                    <p class="product-description">Categories: @Model.Book.Category.Description</p>
+                    <ul class="list-group">
+                        <li class="list-group-item">ISBN: @Model.Book.Isbn</li>
+                        <li class="list-group-item">Release Year: @Model.Book.ReleaseYear</li>
+                        <li class="list-group-item">Author: @Model.Book.Author</li>
+                        <li class="list-group-item">Amount: @Model.Book.Amount</li>
+                    </ul>
+                    <div class="btn-groups">
+                        <button type="button" class="add-cart-btn"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
+                        <button type="button" class="buy-now-btn"><i class="fas fa-wallet"></i>buy now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/script2.js"></script>
+    <script src="~/js/jquery-3.4.1.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/custom.js"></script>

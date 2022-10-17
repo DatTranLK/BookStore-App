@@ -16,6 +16,8 @@ namespace Repository
 
         public List<Book> GetBooks() => BookDAO.Instance.GetBooks();
 
+        public List<Book> GetBooksInStore() => BookDAO.Instance.GetBooksInStore();
+
         public void RemoveBook(int id) => BookDAO.Instance.RemoveBook(id);
 
         public void UpdateBook(Book book) => BookDAO.Instance.UpdateBook(book);
