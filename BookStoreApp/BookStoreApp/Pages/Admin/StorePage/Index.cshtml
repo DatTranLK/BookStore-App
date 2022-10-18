@@ -2,3 +2,54 @@
 @model BookStoreApp.Pages.Admin.StorePage.IndexModel
 @{
 }
+@if(@Model.Role == "1")
+{
+    if(@Model.Msg != null)
+    {
+        <p style="color: red">@Model.Msg</p>
+    }
+    <h1>Store</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Store[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Store[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Store[0].IsActive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="list-wrapper">
+@foreach (var item in Model.Store) {
+        <tr class="list-item">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id"><i class='fas fa-pen'></i></a> |
+                <a asp-page="./Details" asp-route-id="@item.Id"><i class='fas fa-info'></i></a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id"><i class='fas fa-trash'></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<p>
+    <a class="btn btn-primary" asp-page="Create">Create New</a>
+</p>
+<div id="pagination-container"></div>
+}
+else{
+    Response.Redirect("/Login/LoginPage");
+}

@@ -40,6 +40,11 @@ namespace BookStoreApp.Pages.Register
                 ViewData["ErrorMessage"] = "The username has existed, Please enter new username";
                 return Page();
             }
+            if (Password != ConfirmPassword)
+            {
+                ViewData["ErrorMessage"] = "The password must match confirm password";
+                return Page();
+            }
             Account currentAccount = _accountRepository.Register(new Account(Username,Password));
 
             if(currentAccount != null)

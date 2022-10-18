@@ -85,6 +85,7 @@ namespace DataAccessObject
         {
             try
             {
+                category.IsActive = true;
                 _dbContext.Categories.Add(category);
                 _dbContext.SaveChanges();
             }
@@ -98,6 +99,7 @@ namespace DataAccessObject
         {
             try
             {
+                category.IsActive = true;
                 _dbContext.ChangeTracker.Clear();
                 _dbContext.Entry<Category>(category).State = EntityState.Modified;
                 _dbContext.SaveChanges();
