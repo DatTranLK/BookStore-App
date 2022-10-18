@@ -10,7 +10,6 @@ namespace BusinessObject.Models
         public Book()
         {
             BookInStores = new HashSet<BookInStore>();
-            OrderDetails = new HashSet<OrderDetail>();
             RequestBookDetails = new HashSet<RequestBookDetail>();
         }
 
@@ -26,11 +25,11 @@ namespace BusinessObject.Models
         public int? PublisherId { get; set; }
         public string Avatar { get; set; }
         public decimal? Price { get; set; }
+        public string Description { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual Publisher Publisher { get; set; }
         public virtual ICollection<BookInStore> BookInStores { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<RequestBookDetail> RequestBookDetails { get; set; }
     }
 }

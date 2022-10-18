@@ -83,6 +83,8 @@ namespace BusinessObject.Models
 
                 entity.Property(e => e.Avatar).HasColumnType("ntext");
 
+                entity.Property(e => e.Description).HasColumnType("ntext");
+
                 entity.Property(e => e.Isbn)
                     .HasMaxLength(20)
                     .HasColumnName("ISBN");
@@ -128,6 +130,8 @@ namespace BusinessObject.Models
 
                 entity.Property(e => e.Description).HasColumnType("ntext");
 
+                entity.Property(e => e.IsActive).HasColumnName("isActive");
+
                 entity.Property(e => e.Name).HasMaxLength(50);
             });
 
@@ -158,9 +162,9 @@ namespace BusinessObject.Models
             {
                 entity.ToTable("OrderDetail");
 
-                entity.HasOne(d => d.Book)
+                entity.HasOne(d => d.BookInStore)
                     .WithMany(p => p.OrderDetails)
-                    .HasForeignKey(d => d.BookId)
+                    .HasForeignKey(d => d.BookInStoreId)
                     .HasConstraintName("FK_OrderDetail_Book");
 
                 entity.HasOne(d => d.Order)
@@ -217,6 +221,8 @@ namespace BusinessObject.Models
                 entity.ToTable("Store");
 
                 entity.Property(e => e.Address).HasColumnType("ntext");
+
+                entity.Property(e => e.IsActive).HasColumnName("isActive");
 
                 entity.Property(e => e.Name).HasMaxLength(50);
             });

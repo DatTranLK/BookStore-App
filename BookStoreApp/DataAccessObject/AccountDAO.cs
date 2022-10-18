@@ -55,7 +55,7 @@ namespace DataAccessObject
         {
             try
             {
-                if(String.IsNullOrEmpty(account.Username) && String.IsNullOrEmpty(account.Password))
+                if(!String.IsNullOrEmpty(account.Username) && !String.IsNullOrEmpty(account.Password))
                 {
                     account.RoleId = 4;
                     account.IsActive = true;
@@ -76,7 +76,7 @@ namespace DataAccessObject
         {
             try
             {
-                if (String.IsNullOrEmpty(username))
+                if (!String.IsNullOrEmpty(username))
                 {
                     var acc = _dBContext.Accounts.FirstOrDefault(x => x.Username == username.Trim());
                     if (acc != null)

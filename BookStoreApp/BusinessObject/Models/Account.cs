@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -9,26 +7,21 @@ namespace BusinessObject.Models
 {
     public partial class Account
     {
-        public Account(string username,string password)
-        {
-            Username = username;
-            Password = password;
-        }
         public Account()
         {
             OrderCustomers = new HashSet<Order>();
             OrderStaffs = new HashSet<Order>();
             RequestBooks = new HashSet<RequestBook>();
         }
+        public Account(string username, string password)
+        {
+            Username = username;
+            Password = password;
+        }
 
         public int Id { get; set; }
-        [Required]
         public string Username { get; set; }
-        [Required]
         public string Password { get; set; }
-        [NotMapped]
-        [Compare("Password")]
-        public string ConfirmPassword { get; set; }
         public string Name { get; set; }
         public string Avatar { get; set; }
         public string Phone { get; set; }
