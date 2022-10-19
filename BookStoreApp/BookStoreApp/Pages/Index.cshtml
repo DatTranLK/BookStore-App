@@ -104,27 +104,35 @@
                     </div>
                 </div>*@
                 <div class="card col-md-4" style="width: 18rem;">
-                    <div style="width: 100%; height: 60%">
+                    <div  style="width: 100%; height: 60%">
                         <img class="card-img-top" src="@item.Avatar" style="width: 100%; height: 100%" alt="Card image cap">
                     </div>
                     <div class="card-body" style="width: 100%; height: 25%">
-                        <a asp-page="/BookDetailPage" asp-route-id="@item.Id">
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </a>
+                        
+                            <a asp-page="/BookDetailPage" asp-route-id="@item.Id">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </a>
+                        
                         <p class="card-text">@Html.DisplayFor(modelItem => item.Price)</p>
+
+                    </div>
                         @if (@Model.Username != null)
                         {
-                            <a href="" class="btn btn-primary">
+                        <div style="padding-bottom: 30px">
+                            <a href="" class="btn btn-warning">
                                 Add To Cart
                             </a>
+                            </div>
                         }
                         else
                         {
-                            <a asp-page="/Login/LoginPage" class="btn btn-primary">
+
+                        <div style="padding-bottom: 30px">
+                            <a asp-page="/Login/LoginPage" class="btn btn-warning">
                                 Add To Cart
                             </a>
+                            </div>
                         }
-                    </div>
                 </div>
                 }
             </div>
@@ -345,38 +353,37 @@
                     </div>
                 </div>
             </div>
-        <div class="container my-5">
-            <footer class="bg-dark text-center text-white" style="width: 100%">
-                <div class="container p-4 pb-0">
-                    <section class="">
-                        <form action="">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-auto">
-                                    <p class="pt-2">
-                                        <strong>Sign up for our newsletter</strong>
-                                    </p>
-                                </div>
-                                <div class="col-md-5 col-12">
-                                    <div class="form-outline form-white mb-4">
-                                        <input type="email" id="form5Example2" class="form-control" />
-                                        <label class="form-label" for="form5Example2">Email address</label>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <button type="submit" class="btn btn-outline-light mb-4">
-                                        Subscribe
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </section>
-                </div>
-                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                    © 2022 Powered by Team J.F.F
-                </div>
-            </footer>
-        </div>
     </section>
+
+<footer class="bg-dark text-center text-white" style="width: 100%">
+    <div class="container p-4 pb-0">
+        <section class="">
+            <form action="">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-auto">
+                        <p class="pt-2">
+                            <strong>Sign up for our newsletter</strong>
+                        </p>
+                    </div>
+                    <div class="col-md-5 col-12">
+                        <div class="form-outline form-white mb-4">
+                            <input type="email" id="form5Example2" class="form-control" />
+                            <label class="form-label" for="form5Example2">Email address</label>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-outline-light mb-4">
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2022 Powered by Team J.F.F
+    </div>
+</footer>
     <script src="~/js/jquery-3.4.1.min.js"></script>
     <script src="~/js/popper.min.js"></script>
     <script src="~/js/bootstrap.js"></script>
