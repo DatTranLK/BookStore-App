@@ -11,15 +11,18 @@ namespace BookStoreApp.Pages.Admin.PublisherPage
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IPublisherRepository _publisherRepository;
+        private readonly IStoreRepository _storeRepository;
 
         public string Username { get; set; }
         public string Role { get; set; }
-        public IndexModel(IAccountRepository accountRepository, IPublisherRepository publisherRepository)
+        public IndexModel(IAccountRepository accountRepository, IPublisherRepository publisherRepository, IStoreRepository storeRepository)
         {
             _accountRepository = accountRepository;
             _publisherRepository = publisherRepository;
+            _storeRepository = storeRepository;
         }
         public IList<Publisher> Publisher { get; set; }
+        public IList<Store> Store { get; set; }
         public Account Account { get; set; }
         public string Msg { get; set; }
         public void OnGet()
@@ -27,6 +30,7 @@ namespace BookStoreApp.Pages.Admin.PublisherPage
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
+            Store = _storeRepository.GetStoresNoDes();
             Publisher = _publisherRepository.GetPublishers();
             if (Publisher == null)
             {

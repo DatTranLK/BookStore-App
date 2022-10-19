@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Repository;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
@@ -14,25 +15,29 @@ namespace BookStoreApp.Pages.Admin.BookPage
         private readonly IBookRepository _bookRepository;
         private readonly IAccountRepository _accountRepository;
         private readonly BookStoreDBContext _context;
+        private readonly IStoreRepository _storeRepository;
 
         public string Username { get; set; }
         public string Role { get; set; }
         [BindProperty]
         [Required]
         public Book Book { get; set; }
+        public IList<Store> Store { get; set; }
         public Account Account { get; set; }
         public string Msg { get; set; }
-        public CreateModel(IBookRepository bookRepository, IAccountRepository accountRepository, BookStoreDBContext context)
+        public CreateModel(IBookRepository bookRepository, IAccountRepository accountRepository, BookStoreDBContext context, IStoreRepository storeRepository)
         {
             _bookRepository = bookRepository;
             _accountRepository = accountRepository;
             _context = context;
+            _storeRepository = storeRepository;
         }
         public async Task<IActionResult> OnGetAsync()
         {
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
+            Store = _storeRepository.GetStoresNoDes();
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
             ViewData["PublisherId"] = new SelectList(_context.Publishers, "Id", "Name");
             return Page();
@@ -42,6 +47,7 @@ namespace BookStoreApp.Pages.Admin.BookPage
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
+            Store = _storeRepository.GetStoresNoDes();
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
             ViewData["PublisherId"] = new SelectList(_context.Publishers, "Id", "Name");
             if (!ModelState.IsValid)

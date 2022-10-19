@@ -18,6 +18,9 @@ if(@Model.Msg != null)
             <th>
                 @Html.DisplayNameFor(model => model.Category[0].Description)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category[0].IsActive)
+            </th>
             <th></th>
             <th></th>
         </tr>
@@ -31,6 +34,9 @@ if(@Model.Msg != null)
             
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             <td></td>
             <td>
