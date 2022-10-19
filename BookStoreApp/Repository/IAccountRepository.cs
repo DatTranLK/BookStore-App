@@ -17,5 +17,6 @@ namespace Repository
         void RemoveAccount(int id);
         void CreateNewAccount(Account account);
         void UpdateAccount(Account account);
+        int GetIdByUsername(string username);
     }
 }

@@ -37,6 +37,10 @@ namespace BookStoreApp
 
             services.AddScoped<IStoreRepository, StoreRepository>();
 
+            services.AddScoped<IRequestBookRepository, RequestBookRepository>();
+
+            services.AddScoped<IRequestBookDetailRepository, RequestBookDetailRepository>();
+
             services.AddRazorPages();
         }
 

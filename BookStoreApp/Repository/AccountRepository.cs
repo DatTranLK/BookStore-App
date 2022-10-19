@@ -20,6 +20,8 @@ namespace Repository
 
         public List<Account> GetAccounts() => AccountDAO.Instance.GetAccounts();
 
+        public int GetIdByUsername(string username) => AccountDAO.Instance.GetIdByUsername(username);
+
         public Account Register(Account account) => AccountDAO.Instance.Register(account);
 
         public void RemoveAccount(int id) => AccountDAO.Instance.RemoveAccount(id);
