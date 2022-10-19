@@ -16,6 +16,8 @@ namespace Repository
 
         public List<Store> GetStores() => StoreDAO.Instance.GetStores();
 
+        public List<Store> GetStoresNoDes() => StoreDAO.Instance.GetStoresNoDes();
+
         public void RemoveStore(int id) => StoreDAO.Instance.RemoveStore(id);
 
         public void UpdateStore(Store store) => StoreDAO.Instance.UpdateStore(store);

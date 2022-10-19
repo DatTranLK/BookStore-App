@@ -47,6 +47,23 @@ namespace DataAccessObject
                 throw new Exception(ex.Message);
             }
         }
+        public List<Store> GetStoresNoDes()
+        {
+            try
+            {
+                var lst = _dbContext.Stores.OrderBy(x => x.Id).ToList();
+                if (lst != null)
+                {
+                    return lst;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
         public Store GetStoreById(int id)
         {
             try
