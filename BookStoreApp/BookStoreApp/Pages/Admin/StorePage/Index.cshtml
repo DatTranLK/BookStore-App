@@ -13,19 +13,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Store[0].Name)
+                @Html.DisplayNameFor(model => model.Store2[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Store[0].Address)
+                @Html.DisplayNameFor(model => model.Store2[0].Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Store[0].IsActive)
+                @Html.DisplayNameFor(model => model.Store2[0].IsActive)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody class="list-wrapper">
-@foreach (var item in Model.Store) {
+@foreach (var item in Model.Store2) {
         <tr class="list-item">
             <td>
                 @Html.DisplayFor(modelItem => item.Name)

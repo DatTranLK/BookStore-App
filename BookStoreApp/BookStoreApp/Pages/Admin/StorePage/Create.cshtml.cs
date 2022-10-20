@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repository;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
@@ -18,8 +19,9 @@ namespace BookStoreApp.Pages.Admin.StorePage
         public string Role { get; set; }
         [BindProperty]
         [Required]
-        public Store Store { get; set; }
+        public Store Store2 { get; set; }
         public Account Account { get; set; }
+        public IList<Store> Store { get; set; }
         public string Msg { get; set; }
         public CreateModel(IAccountRepository accountRepository, BookStoreDBContext context, IStoreRepository storeRepository)
         {
@@ -32,6 +34,7 @@ namespace BookStoreApp.Pages.Admin.StorePage
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
+            Store = _storeRepository.GetStoresNoDes();
             return Page();
         }
         public async Task<IActionResult> OnPostAsync()
@@ -39,16 +42,17 @@ namespace BookStoreApp.Pages.Admin.StorePage
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
+            Store = _storeRepository.GetStoresNoDes();
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            if (string.IsNullOrEmpty(Store.Name) || string.IsNullOrEmpty(Store.Address))
+            if (string.IsNullOrEmpty(Store2.Name) || string.IsNullOrEmpty(Store2.Address))
             {
                 Msg = "Please enter Name or Address";
                 return Page();
             }
-            _storeRepository.CreateNewStore(Store);
+            _storeRepository.CreateNewStore(Store2);
 
             return RedirectToPage("./Index");
         }

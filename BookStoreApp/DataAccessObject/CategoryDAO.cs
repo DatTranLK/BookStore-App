@@ -72,8 +72,16 @@ namespace DataAccessObject
                 var cate = _dbContext.Categories.FirstOrDefault(x => x.Id == id);
                 if (cate != null)
                 {
-                    _dbContext.Categories.Remove(cate);
-                    _dbContext.SaveChanges();
+                    if (cate.IsActive == true)
+                    {
+                        cate.IsActive = false;
+                        _dbContext.SaveChanges();
+                    }
+                    else if (cate.IsActive == false)
+                    {
+                        cate.IsActive = true;
+                        _dbContext.SaveChanges();
+                    }
                 }
             }
             catch (Exception ex)
