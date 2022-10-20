@@ -42,7 +42,7 @@ namespace BookStoreApp.Pages.Login
                 {
                     HttpContext.Session.SetString("Username", account.Username);
                     HttpContext.Session.SetString("Role", account.RoleId.ToString());
-                    return RedirectToPage("/Importer/ImporterPage");
+                    return RedirectToPage("/Importer/ImportPage/Index");
                 }
                 if (account.RoleId == 3)
                 {

@@ -52,12 +52,18 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" asp-page="/Importer/ImportPage/Index">
                     <i class="fas fa-fw fa fa-upload"></i>
                     <span>Import</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" asp-page="/Importer/Request/Index">
+                    <i class="fa fa-history"></i>
+                    <span>Import History</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-page="/Admin/BookPage/Index">
                     <i class="fas fa-fw fa fa-book"></i>
                     <span>Book</span>
                 </a>
@@ -172,11 +178,7 @@
 
                     <!-- Content Row -->
                     <div class="row">
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Importer</h1>
-                            @*<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>*@
-                        </div>
+                        
                         @RenderBody()
                     </div>
 
