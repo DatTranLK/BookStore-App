@@ -130,7 +130,7 @@ namespace DataAccessObject
 
         public List<Book> GetBooksInStore()
         {
-            var list = _dbContext.Books.ToList();
+            var list = _dbContext.Books.Where(x => x.Amount > 0).ToList();
             if (list != null)
             {
                 return list;
