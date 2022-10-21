@@ -1,8 +1,8 @@
-Create Database BookStoreDB
+Create database BookStoreDB
 Go
 USE [BookStoreDB]
 GO
-/****** Object:  Table [dbo].[Account]    Script Date: 10/18/2022 8:44:51 PM ******/
+/****** Object:  Table [dbo].[Account]    Script Date: 10/21/2022 10:02:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -25,7 +25,7 @@ CREATE TABLE [dbo].[Account](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Book]    Script Date: 10/18/2022 8:44:51 PM ******/
+/****** Object:  Table [dbo].[Book]    Script Date: 10/21/2022 10:02:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -50,7 +50,7 @@ CREATE TABLE [dbo].[Book](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[BookInStore]    Script Date: 10/18/2022 8:44:51 PM ******/
+/****** Object:  Table [dbo].[BookInStore]    Script Date: 10/21/2022 10:02:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -66,7 +66,7 @@ CREATE TABLE [dbo].[BookInStore](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Category]    Script Date: 10/18/2022 8:44:51 PM ******/
+/****** Object:  Table [dbo].[Category]    Script Date: 10/21/2022 10:02:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -82,7 +82,7 @@ CREATE TABLE [dbo].[Category](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Order]    Script Date: 10/18/2022 8:44:51 PM ******/
+/****** Object:  Table [dbo].[Order]    Script Date: 10/21/2022 10:02:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -101,7 +101,7 @@ CREATE TABLE [dbo].[Order](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[OrderDetail]    Script Date: 10/18/2022 8:44:51 PM ******/
+/****** Object:  Table [dbo].[OrderDetail]    Script Date: 10/21/2022 10:02:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -117,7 +117,7 @@ CREATE TABLE [dbo].[OrderDetail](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Publisher]    Script Date: 10/18/2022 8:44:51 PM ******/
+/****** Object:  Table [dbo].[Publisher]    Script Date: 10/21/2022 10:02:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -132,7 +132,7 @@ CREATE TABLE [dbo].[Publisher](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[RequestBook]    Script Date: 10/18/2022 8:44:51 PM ******/
+/****** Object:  Table [dbo].[RequestBook]    Script Date: 10/21/2022 10:02:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -150,7 +150,7 @@ CREATE TABLE [dbo].[RequestBook](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[RequestBookDetail]    Script Date: 10/18/2022 8:44:51 PM ******/
+/****** Object:  Table [dbo].[RequestBookDetail]    Script Date: 10/21/2022 10:02:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -166,7 +166,7 @@ CREATE TABLE [dbo].[RequestBookDetail](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Role]    Script Date: 10/18/2022 8:44:51 PM ******/
+/****** Object:  Table [dbo].[Role]    Script Date: 10/21/2022 10:02:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -180,7 +180,7 @@ CREATE TABLE [dbo].[Role](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Store]    Script Date: 10/18/2022 8:44:51 PM ******/
+/****** Object:  Table [dbo].[Store]    Script Date: 10/21/2022 10:02:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -199,9 +199,9 @@ GO
 SET IDENTITY_INSERT [dbo].[Account] ON 
 
 INSERT [dbo].[Account] ([Id], [Username], [Password], [Name], [Avatar], [Phone], [DateOfBirth], [IsActive], [RoleId], [StoreId], [Address]) VALUES (1, N'dat', N'admin@@', N'Tran Thanh Dat', N'https://scontent.fsgn5-6.fna.fbcdn.net/v/t1.6435-9/174762436_1564087070462196_7088412740167491002_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=174925&_nc_ohc=AIOCzgUZmb8AX8uag1j&_nc_ht=scontent.fsgn5-6.fna&oh=00_AT8nQS8VOu-Km5-qbndO2dgZx-lbnhTBzhQCUJ3iFuS2xw&oe=636D30D1', N'123456789 ', CAST(N'2001-06-25' AS Date), 1, 1, NULL, N'District 9, HCM City')
-INSERT [dbo].[Account] ([Id], [Username], [Password], [Name], [Avatar], [Phone], [DateOfBirth], [IsActive], [RoleId], [StoreId], [Address]) VALUES (2, N'linh', N'123', N'Do Anh Linh', N'https://scontent.fsgn5-2.fna.fbcdn.net/v/t39.30808-6/277997569_3353450438246521_7339571529235875641_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=_t1Vq70yQYcAX-17zQ2&_nc_ht=scontent.fsgn5-2.fna&oh=00_AT80jMaPQVAnKfR-D3XwUWEIIvl9MmuA26jpM62ZW2ZAjg&oe=634EE205', N'0123456789', CAST(N'2000-11-12' AS Date), 1, 2, 1, N'District 9, HCM City')
-INSERT [dbo].[Account] ([Id], [Username], [Password], [Name], [Avatar], [Phone], [DateOfBirth], [IsActive], [RoleId], [StoreId], [Address]) VALUES (3, N'thang', N'123', N'Tran Ngoc Thang', N'https://scontent.fsgn5-14.fna.fbcdn.net/v/t39.30808-6/307438835_2013015145571418_6591376168230117923_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=L6rbiMjizLMAX-_K1t1&_nc_ht=scontent.fsgn5-14.fna&oh=00_AT_u7o_GhDa0e8xTbfmJDQyYd6DPNWfJy1EKiOaIu_RbmA&oe=634D4461', N'0123456789', CAST(N'2001-01-21' AS Date), 1, 3, 1, N'District 9, HCM City')
-INSERT [dbo].[Account] ([Id], [Username], [Password], [Name], [Avatar], [Phone], [DateOfBirth], [IsActive], [RoleId], [StoreId], [Address]) VALUES (4, N'huy', N'123', N'Tran Minh Huy', N'https://scontent.fsgn5-5.fna.fbcdn.net/v/t39.30808-1/277582153_685497472597196_4540333871419656258_n.jpg?stp=dst-jpg_s200x200&_nc_cat=100&ccb=1-7&_nc_sid=7206a8&_nc_ohc=qmqImZaBx0UAX96u55Y&_nc_ht=scontent.fsgn5-5.fna&oh=00_AT9Ipf1Hj9MR11s_iu1Hta2irS-xEErNWN6Tee1wKSF0vQ&oe=634D7A54', N'0123456789', CAST(N'2001-04-14' AS Date), 1, 4, 1, N'Tan Binh, HCM City')
+INSERT [dbo].[Account] ([Id], [Username], [Password], [Name], [Avatar], [Phone], [DateOfBirth], [IsActive], [RoleId], [StoreId], [Address]) VALUES (2, N'linh', N'123', N'Do Anh Linh', N'https://scontent.fsgn5-11.fna.fbcdn.net/v/t1.6435-9/61146098_2484603355131238_5798437159358693376_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=174925&_nc_ohc=s5LcjWY9Ua8AX8luRqH&_nc_ht=scontent.fsgn5-11.fna&oh=00_AT-UKGrcxNR1xWuFmclISjMzG4Ar9XkLwPT8HZEDvWbqGQ&oe=63767EDF', N'0123456789', CAST(N'2000-11-12' AS Date), 1, 2, 1, N'District 9, HCM City')
+INSERT [dbo].[Account] ([Id], [Username], [Password], [Name], [Avatar], [Phone], [DateOfBirth], [IsActive], [RoleId], [StoreId], [Address]) VALUES (3, N'thang', N'123', N'Tran Ngoc Thang', N'blob:https://fptuniversity-my.sharepoint.com/cddcabbc-c94e-4bd4-b8aa-aa861772eaf3', N'0123456789', CAST(N'2001-01-21' AS Date), 1, 3, 1, N'District 9, HCM City')
+INSERT [dbo].[Account] ([Id], [Username], [Password], [Name], [Avatar], [Phone], [DateOfBirth], [IsActive], [RoleId], [StoreId], [Address]) VALUES (4, N'huy', N'123', N'Tran Minh Huy', N'blob:https://fptuniversity-my.sharepoint.com/f5f5df87-684a-4b1b-813e-56559596ba66', N'0123456789', CAST(N'2001-04-14' AS Date), 1, 4, 1, N'Tan Binh, HCM City')
 INSERT [dbo].[Account] ([Id], [Username], [Password], [Name], [Avatar], [Phone], [DateOfBirth], [IsActive], [RoleId], [StoreId], [Address]) VALUES (5, N'dattest', N'123', NULL, NULL, NULL, NULL, 1, 4, NULL, NULL)
 INSERT [dbo].[Account] ([Id], [Username], [Password], [Name], [Avatar], [Phone], [DateOfBirth], [IsActive], [RoleId], [StoreId], [Address]) VALUES (6, N'dattest2', N'123', NULL, NULL, NULL, NULL, 1, 4, NULL, NULL)
 INSERT [dbo].[Account] ([Id], [Username], [Password], [Name], [Avatar], [Phone], [DateOfBirth], [IsActive], [RoleId], [StoreId], [Address]) VALUES (7, N'customer14', N'1234', NULL, NULL, NULL, NULL, 1, 4, NULL, NULL)
@@ -227,6 +227,14 @@ INSERT [dbo].[Book] ([Id], [Name], [ISBN], [Author], [ReleaseYear], [Version], [
 INSERT [dbo].[Book] ([Id], [Name], [ISBN], [Author], [ReleaseYear], [Version], [IsActive], [Amount], [CategoryId], [PublisherId], [Avatar], [Price], [Description]) VALUES (12, N' RÈN LUYỆN TƯ DUY, NÂNG CAO IQ - THỬ TÀI THÁM TỬ', N' 978-604-2-27689-4', N' Hồ Viện Viện', N'2022', 1, 1, 5, 3, 1, N'https://salt.tikicdn.com/cache/750x750/ts/product/fb/3a/04/7ae62046a57c316bf746eb9e012fdf19.jpg.webp', 45000.0000, NULL)
 SET IDENTITY_INSERT [dbo].[Book] OFF
 GO
+SET IDENTITY_INSERT [dbo].[BookInStore] ON 
+
+INSERT [dbo].[BookInStore] ([Id], [BookId], [StoreId], [Amount]) VALUES (1, 1, 1, 5)
+INSERT [dbo].[BookInStore] ([Id], [BookId], [StoreId], [Amount]) VALUES (2, 2, 1, 5)
+INSERT [dbo].[BookInStore] ([Id], [BookId], [StoreId], [Amount]) VALUES (3, 1, 2, 5)
+INSERT [dbo].[BookInStore] ([Id], [BookId], [StoreId], [Amount]) VALUES (4, 1, 2, 2)
+SET IDENTITY_INSERT [dbo].[BookInStore] OFF
+GO
 SET IDENTITY_INSERT [dbo].[Category] ON 
 
 INSERT [dbo].[Category] ([Id], [Name], [Description], [isActive]) VALUES (1, N'Foreign Literature', N'Foreign literature studies concerns the comprehensive research of literature in the language of the country it was written in that includes the study of the regional and historical circumstances in which it was written.', 1)
@@ -237,6 +245,16 @@ INSERT [dbo].[Category] ([Id], [Name], [Description], [isActive]) VALUES (5, N'M
 INSERT [dbo].[Category] ([Id], [Name], [Description], [isActive]) VALUES (6, N'Comic', N'Comics is a medium used to express ideas with images, often combined with text or other visual information. It typically takes the form of a sequence of panels of images.', 1)
 INSERT [dbo].[Category] ([Id], [Name], [Description], [isActive]) VALUES (8, N'Light Novel', N'A light novel (Japanese: ライトノベル, Hepburn: raito noberu; Chinese: 輕小說; Wade–Giles: Ch''ing Hsiao-shuo) is a style of young adult novel primarily targeting high school and middle school students.', 1)
 SET IDENTITY_INSERT [dbo].[Category] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Order] ON 
+
+INSERT [dbo].[Order] ([Id], [TotalPrice], [CreateDate], [ShippingAddress], [CustomerId], [OrderStatus], [StaffId]) VALUES (1, 100000.0000, CAST(N'2022-10-19T00:00:00.000' AS DateTime), N'Tân Bình, HCM', 9, N'Đang Vận Chuyển', 3)
+SET IDENTITY_INSERT [dbo].[Order] OFF
+GO
+SET IDENTITY_INSERT [dbo].[OrderDetail] ON 
+
+INSERT [dbo].[OrderDetail] ([Id], [OrderId], [BookInStoreId], [Quantity]) VALUES (1, 1, 1, 5)
+SET IDENTITY_INSERT [dbo].[OrderDetail] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Publisher] ON 
 
