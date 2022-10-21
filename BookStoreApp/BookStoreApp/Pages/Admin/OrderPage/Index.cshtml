@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Order[0].Customer)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Order[0].TotalPrice)
             </th>
             <th>
@@ -25,9 +28,6 @@
                 @Html.DisplayNameFor(model => model.Order[0].OrderStatus)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].Customer)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Order[0].Staff)
             </th>
             <th></th>
@@ -36,6 +36,9 @@
     <tbody class="list-wrapper">
 @foreach (var item in Model.Order) {
         <tr class="list-item">
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Name)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
@@ -49,15 +52,12 @@
                 @Html.DisplayFor(modelItem => item.OrderStatus)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Customer.Name)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Staff.Name)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id"><i class='fas fa-pen'></i></a> |
-                <a asp-page="./Details" asp-route-id="@item.Id"><i class='fas fa-info'></i></a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id"><i class='fas fa-trash'></i></a>
+@*                <a asp-page="./Edit" asp-route-id="@item.Id"><i class='fas fa-pen'></i></a> |*@
+                <a asp-page="/Admin/OrderDetailPage/Index" asp-route-id="@item.Id"><i class='fas fa-info'></i></a>
+@*                <a asp-page="./Delete" asp-route-id="@item.Id"><i class='fas fa-trash'></i></a>*@
             </td>
         </tr>
 }
