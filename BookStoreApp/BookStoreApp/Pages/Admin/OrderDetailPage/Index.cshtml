@@ -1,0 +1,61 @@
+﻿@page
+@model BookStoreApp.Pages.Admin.OrderDetailPage.IndexModel
+@{
+}
+@if(@Model.Role == "1")
+{
+        if(@Model.Msg != null)
+{
+    <p style="color: red">@Model.Msg</p>
+}
+<h1>OrderDetail</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderDetail[0].BookInStore.Book)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderDetail[0].Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderDetail[0].BookInStore.Store)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderDetail[0].Order)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="list-wrapper">
+    @foreach (var item in Model.OrderDetail) {
+            <tr class="list-item">
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookInStore.Book.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookInStore.Store.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderId)
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+    <p>
+         <a asp-page="/Admin/OrderPage/Index">Back to Orders</a>
+    </p>
+    <div id="pagination-container"></div>
+}
+else
+{
+    Response.Redirect("/Login/LoginPage");
+}

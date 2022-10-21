@@ -51,11 +51,11 @@ namespace BookStoreApp.Pages.Login
                     return RedirectToPage("/Seller/SellerPage");
                 }
                  if (account.RoleId == 4)
-                {
+                 {
                     HttpContext.Session.SetString("Username", account.Username);
                     HttpContext.Session.SetString("Role", account.RoleId.ToString());
                     return RedirectToPage("/Index");
-                }
+                 }
                 
             }
             else
