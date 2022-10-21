@@ -189,5 +189,25 @@ namespace DataAccessObject
                 throw new Exception(ex.Message);
             }
         }
+
+        public int GetIdByUsername(string username)
+        {
+            try
+            {
+                var acc = _dBContext.Accounts
+                    .Include(x => x.Role)
+                    .Include(x => x.Store)
+                    .FirstOrDefault(x => x.Username == username);
+                if (acc != null)
+                {
+                    return acc.Id;
+                }
+                return -1;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
