@@ -13,17 +13,25 @@ namespace BookStoreApp.Pages
 {
     public class IndexModel : PageModel
     {
+
         public IList<Book> Book { get; set; }
+        public IList<Store> Store { get; set; }
+        public string Msg { get; set; }
+        public Account Account { get; set; }
 
         public string Username { get; set; }
         public string Role { get; set; }
         private readonly ILogger<IndexModel> _logger;
         private readonly IBookRepository _bookRepository;
+        private readonly IStoreRepository _storeRepository;
+        private readonly IAccountRepository _accountRepository;
 
-        public IndexModel(ILogger<IndexModel> logger, IBookRepository bookRepository)
+        public IndexModel(ILogger<IndexModel> logger, IBookRepository bookRepository, IStoreRepository storeRepository, IAccountRepository accountRepository)
         {
             _logger = logger;
             _bookRepository = bookRepository;
+            _storeRepository = storeRepository;
+            _accountRepository = accountRepository;
         }
 
         public void OnGet()
@@ -31,6 +39,13 @@ namespace BookStoreApp.Pages
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Book = _bookRepository.GetBooksInStore();
+            Account = _accountRepository.GetAccountByUsername(Username);
+            Store = _storeRepository.GetStoresNoDes();
+            if (Store == null)
+            {
+                Msg = "There is no store in here";
+            }
+
         }
         public IActionResult OnGetLogout()
         {

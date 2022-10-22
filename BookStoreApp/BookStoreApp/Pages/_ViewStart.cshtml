@@ -8,6 +8,10 @@
     {
         Layout = "_LayoutImporterPage";
     }
+    else if (Context.Session.GetString("Role") == "3")
+    {
+        Layout = "_LayoutSellerPage";
+    }
     else
     {
         Layout = "_Layout";
