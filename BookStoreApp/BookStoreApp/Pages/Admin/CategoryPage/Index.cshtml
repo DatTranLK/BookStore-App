@@ -2,9 +2,9 @@
 @model BookStoreApp.Pages.Admin.CategoryPage.IndexModel
 @{
 }
-@if(@Model.Role == "1")
+@if (@Model.Role == "1" || @Model.Role == "3")
 {
-if(@Model.Msg != null)
+@if(@Model.Msg != null)
 {
     <p style="color: red">@Model.Msg</p>
 }
@@ -39,8 +39,9 @@ if(@Model.Msg != null)
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             <td></td>
+            @if(@Model.Role != "3"){
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id"><i class='fas fa-pen'></i></a>  
+                <a asp-page="./Edit" asp-route-id="@item.Id"><i class='fas fa-pen'></i></a>
             </td>
             <td>
                 <a asp-page="./Details" asp-route-id="@item.Id"><i class='fas fa-info'></i></a>
@@ -48,13 +49,18 @@ if(@Model.Msg != null)
             <td>
                 <a asp-page="./Delete" asp-route-id="@item.Id"><i class='fas fa-trash'></i></a>
             </td>
+            }
+            
         </tr>
 }
     </tbody>
 </table>
-<p>
-    <a class="btn btn-primary" asp-page="Create">Create New</a>
-</p>
+        @if(@Model.Role != "3"){
+                <p>
+                    <a class="btn btn-primary" asp-page="Create">Create New</a>
+                </p>
+        }
+
 <div id="pagination-container"></div>
 }
 else{

@@ -2,7 +2,7 @@
 @model BookStoreApp.Pages.Admin.PublisherPage.IndexModel
 @{
 }
-@if(@Model.Role == "1")
+@if (@Model.Role == "1" || @Model.Role == "3")
 {
     if(@Model.Msg != null)
     {
@@ -30,18 +30,26 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id"><i class='fas fa-pen'></i></a> |
-                <a asp-page="./Details" asp-route-id="@item.Id"><i class='fas fa-info'></i></a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id"><i class='fas fa-trash'></i></a>
-            </td>
+            @if (Model.Role != "3")
+            {
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id"><i class='fas fa-pen'></i></a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id"><i class='fas fa-info'></i></a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id"><i class='fas fa-trash'></i></a>
+                </td>
+            }
+           
         </tr>
 }
     </tbody>
 </table>
-<p>
+    @if (@Model.Role != "3")
+    {
+        <p>
         <a class="btn btn-primary" asp-page="Create">Create New</a>
-    </p>
+        </p>
+    }
+    
     <div id="pagination-container"></div>
 }
 else

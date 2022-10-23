@@ -2,7 +2,7 @@
 @model BookStoreApp.Pages.Admin.BookPage.DetailsModel
 @{
 }
-@if (@Model.Role == "1")
+@if (@Model.Role == "1" || @Model.Role == "3")
 {
     <h1>Details</h1>
 
@@ -84,10 +84,19 @@
             </dd>
         </dl>
     </div>
+    @if (@Model.Role == "1" )
+    {
     <div>
         <a asp-page="./Edit" asp-route-id="@Model.Book.Id">Edit</a> |
         <a asp-page="./Index">Back to List</a>
     </div>
+    }
+    @if ( @Model.Role == "3")
+    {
+        <div>
+            <a asp-page="/Seller/BookListView">Back to List</a>
+        </div>
+    }
 }
 else{
     Response.Redirect("/Login/LoginPage");

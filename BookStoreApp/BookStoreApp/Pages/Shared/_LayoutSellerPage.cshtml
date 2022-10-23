@@ -59,47 +59,35 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-page="/Admin/BookPage/Index">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-page="/Index">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">J.F.F TEAM</div>
             </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-
             <!-- Heading -->
-            <div class="sidebar-heading">
-                Seller
-            </div>
-            <li class="nav-item">
+            <li class="nav-item" style="color: white">
+                <div class="sidebar-heading" style="color: white; font-size:18px" >
+                    View
+                </div>
+                <div style="padding-left:10px; padding-top:5px">
+                    <a style="text-decorations:none; color:inherit; padding:10px" asp-page="/Seller/BookListView">
+                        <i class="fas fa-list"></i>
+                    </a>
+                    <a style="text-decorations:none; color:inherit; " asp-page="/Index">
+                        <i class="fas fa-border-all"></i>
+                    </a>
+                </div>
+                
+            </li>
+            <hr class="sidebar-divider">
+            <li class="nav-item" style="color: white">
                 <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-file"></i>
+                    <i style="color: white" class="fas fa-fw fa-file"></i>
                     <span>Report</span>
                 </a>
             </li>
-            <li class="nav-item" style="color: white">
-                <a class="nav-link" asp-page="/Admin/BookPage/Index">
-                    <i style="color: white" class="fas fa-fw fa-book"></i>
-                    <span>Books</span></a>
-            </li>
-            <li class="nav-item" style="font-size: .85rem;color: white; margin-left: 15px; padding: 10px 0;">
-                      <a data-toggle="dropdown"><i class="fas fa-fw fa-store-alt"></i>
-                    <span style="padding-left: 5px">Book In Stores <i class="fas fa-fw fa-caret-down"></i></span></a>
-                      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        @foreach (var item in Model.Store)
-                        {
-                            <li role="presentation">
-                                <a role="menuitem" tabindex="-1" asp-page="/Admin/BookInStorePage/Index" asp-route-id="@item.Id">@item.Name</a>
-                            </li>
-                        }
-                      </ul>
-            </li>
-            
-            <!-- Nav Item - Pages Collapse Menu -->
+      
            <li class="nav-item" style="color: white">
                 <a class="nav-link" asp-page="/Admin/OrderPage/Index">
                     <i style="color: white" class="fas fa-fw fa-shopping-cart"></i>
@@ -119,11 +107,8 @@
             <li class="nav-item" style="color: white">
                 <a class="nav-link" asp-page="/Admin/StorePage/Index">
                     <i style="color: white" class="fas fa-fw fa-store"></i>
-                    <span>Store</span></a>
+                    <span>Your Store Infor</span></a>
             </li>
-            <!-- Nav Item - Utilities Collapse Menu -->
-            
-
             
         </ul>
         <!-- End of Sidebar -->
@@ -181,6 +166,7 @@
                                     </div>
                                 </form>
                             </div>
+                             
                         </li>
 
                         <!-- Nav Item - Alerts -->

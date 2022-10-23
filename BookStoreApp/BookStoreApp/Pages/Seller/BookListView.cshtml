@@ -1,0 +1,49 @@
+﻿@page
+@model BookStoreApp.Pages.Seller.BookListViewModel
+@{
+}   
+<h1>Book In Store</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookInStore[0].Book.Avatar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookInStore[0].Book)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookInStore[0].Book.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookInStore[0].Amount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="list-wrapper">
+        @foreach (var item in Model.BookInStore)
+        {
+            <tr class="list-item">
+
+                <td>
+                    <img style="height:190px; width:120px; border-style: solid;" src="@item.Book.Avatar" alt="watch">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    <a asp-page="/" asp-route-id="@item.Id">Add to card</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div id="pagination-container"></div>
