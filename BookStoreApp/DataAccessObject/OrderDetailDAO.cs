@@ -1,4 +1,4 @@
-﻿using BusinessObject.Models;
+using BusinessObject.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -28,6 +28,30 @@ namespace DataAccessObject
                     }
                     return instance;
                 }
+            }
+        }
+
+        
+        public void AddNewOrderDetail(int quantity, int orderId, int bookId)
+        {
+            try
+            {
+                var orderDetail = new OrderDetail();
+                orderDetail.Quantity = quantity;
+                orderDetail.BookId = bookId;
+                orderDetail.OrderId = orderId;
+                _dbContext.OrderDetails.Add(orderDetail);
+                _dbContext.SaveChanges();
+                var book = _dbContext.Books.FirstOrDefault(x => x.Id == bookId);
+                if (book != null)
+                {
+                    book.Amount -= quantity;
+                    _dbContext.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
         public List<OrderDetail> GetOrderDetailDAOs(int orderId)
