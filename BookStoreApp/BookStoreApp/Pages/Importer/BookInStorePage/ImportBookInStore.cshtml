@@ -1,0 +1,58 @@
+﻿@page
+@model BookStoreApp.Pages.Importer.BookInStorePage.ImportBookInStoreModel
+
+
+@if (@Model.Role == "2")
+{
+    @if (@Model.Msg != null)
+    {
+        <div>
+            <p style="color: red">@Model.Msg</p>
+        </div>
+        <br/>
+        <div>
+            <a asp-page="./Index" style="text-decoration: underline" asp-route-id="@Model.StoreId"> Continue Import</a>
+        </div>
+    }
+    else
+    {
+        <table border="1" class="table table-hover">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Avatar</th>
+                <th>Quantity</th>
+                <th>Delete</th>
+                <th>Action</th>
+            </tr>
+            @foreach (var item in Model.importCak)
+            {
+                <tr>
+                    <td>@item.Book.Id</td>
+                    <td>@item.Book.Name</td>
+                    <td><img src="@item.Book.Avatar" width="120" height="100" /></td>
+                    <td>@item.Quantity</td>
+                    <td>
+                        <a asp-page="importBookInStore" asp-page-handler="delete" asp-route-id="@item.Book.Id">X</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-secondary" asp-page="importBookInStore" asp-page-handler="increase" asp-route-id="@item.Book.Id"><i class="fas fa-fw fa-plus"></i></a>
+                        <a class="btn btn-outline-secondary" asp-page="importBookInStore" asp-page-handler="decrease" asp-route-id="@item.Book.Id"><i class="fas fa-fw fa-minus"></i></a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <form method="post" style="margin-left: 1500px">
+            <button class="btn btn-primary btn-lg">Import</button>
+        </form>
+        <br />
+        <a asp-page="./Index" class="btn btn-primary" style="margin-left: -1600px; padding: 10px; text-align:center;" asp-route-id="@Model.StoreId">Continue Import</a>
+    }
+
+
+}
+else
+{
+    Response.Redirect("/Login/LoginPage");
+}

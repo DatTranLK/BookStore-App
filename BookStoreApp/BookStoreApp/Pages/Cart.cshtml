@@ -1,0 +1,65 @@
+﻿@page
+@model BookStoreApp.Pages.CartModel
+<link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
+<link href="~/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/css/style.css" rel="stylesheet" />
+<link href="~/css/responsive.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="~/css/style2.css">
+    <table border="1" class="table table-hover">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Avatar</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Sub Total</th>
+            <th>Delete</th>
+            <th>Action</th>
+        </tr>
+    @foreach (var item in Model.cartCus)
+        {
+        Model.Total += item.Book.Price * item.Quantity;
+            <tr>
+                <td>@item.Book.Id</td>
+                <td>@item.Book.Name</td>
+                <td><img src="@item.Book.Avatar" width="120" height="100" /></td>
+                <td>@item.Book.Price</td>
+                <td>@item.Quantity</td>
+                <td>@(item.Book.Price * item.Quantity)</td>
+                <td>
+                    <a asp-page="cart" asp-page-handler="delete" asp-route-id="@item.Book.Id">X</a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-secondary" asp-page="cart" asp-page-handler="increase" asp-route-id="@item.Book.Id"><i class="fas fa-fw fa-plus"></i></a>
+                    <a class="btn btn-outline-secondary" asp-page="cart" asp-page-handler="decrease" asp-route-id="@item.Book.Id"><i class="fas fa-fw fa-minus"></i></a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="5" align="center">
+                Total
+            </td>
+            <td>
+                @Model.Total
+            </td>
+        </tr>
+    </table>
+
+    <form method="post">
+        <div class="input-group-append">
+            <label asp-for="@Model.ShippingAddress"></label>
+            <input asp-for="@Model.ShippingAddress" class="form-control" style="width: 300px; margin-left: 10px; margin-right: 100px" name="SubShippingAddr" required/>
+            <span asp-validation-for="@Model.ShippingAddress" class="text-danger"></span>
+
+            <input type="text" name="SubTotal" value="@Model.Total" hidden />
+            <button class="btn btn-primary" asp-for="@Model.Total" type="submit" style="margin-left: 1230px">Checkout</button>
+        </div>
+    </form>
+    <a asp-page="index" class="btn btn-primary" style="padding: 10px; text-align:center;">Continue shopping</a>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
