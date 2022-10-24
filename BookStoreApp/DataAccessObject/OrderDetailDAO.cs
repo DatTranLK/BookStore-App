@@ -1,4 +1,5 @@
-﻿using BusinessObject.Models;
+using BusinessObject.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,7 @@ namespace DataAccessObject
         }
         public static OrderDetailDAO Instance
         {
-            get
-            {
+            get {
                 lock (instanceLock)
                 {
                     if (instance == null)
@@ -30,6 +30,7 @@ namespace DataAccessObject
                 }
             }
         }
+
         
         public void AddNewOrderDetail(int quantity, int orderId, int bookId)
         {
@@ -51,6 +52,67 @@ namespace DataAccessObject
             catch (Exception e)
             {
                 throw new Exception(e.Message);
+            }
+        }
+        public List<OrderDetail> GetOrderDetailDAOs(int orderId)
+        {
+            try
+            {
+                var orderDetails = _dbContext.OrderDetails
+                    .Include(x => x.BookInStore.Store)
+                    .Include(x => x.BookInStore.Book)
+                    .Include(x => x.Order)
+                    .Where(x => x.OrderId == orderId)
+                    .OrderByDescending(x => x.Id)
+                    .ToList();
+                if (orderDetails != null)
+                {
+                    return orderDetails;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+        public OrderDetail GetOrderDetailById(int id)
+        {
+            try
+            {
+                var orderDetail = _dbContext.OrderDetails
+                    .Include(x => x.BookInStore.Store)
+                    .Include(x => x.BookInStore.Book)
+                    .Include(x => x.Order)
+                    .FirstOrDefault(x => x.Id == id);
+                if (orderDetail != null)
+                {
+                    return orderDetail;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+        public void RemoveOrderDetail(int id)
+        {
+            try
+            {
+                var orderDetail = _dbContext.OrderDetails.FirstOrDefault(x => x.Id == id);
+                if (orderDetail != null)
+                { 
+                    _dbContext.OrderDetails.Remove(orderDetail);
+                    _dbContext.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
             }
         }
     }

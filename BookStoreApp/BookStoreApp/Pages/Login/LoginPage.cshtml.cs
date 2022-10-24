@@ -48,14 +48,14 @@ namespace BookStoreApp.Pages.Login
                 {
                     HttpContext.Session.SetString("Username", account.Username);
                     HttpContext.Session.SetString("Role", account.RoleId.ToString());
-                    return RedirectToPage("/Seller/SellerPage");
+                    return RedirectToPage("/Index");
                 }
                  if (account.RoleId == 4)
-                {
+                 {
                     HttpContext.Session.SetString("Username", account.Username);
                     HttpContext.Session.SetString("Role", account.RoleId.ToString());
                     return RedirectToPage("/Index");
-                }
+                 }
                 
             }
             else

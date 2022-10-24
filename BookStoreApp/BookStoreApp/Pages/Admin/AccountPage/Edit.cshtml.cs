@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Repository;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
@@ -13,24 +14,28 @@ namespace BookStoreApp.Pages.Admin.AccountPage
     {
         private readonly IAccountRepository _accountRepository;
         private readonly BookStoreDBContext _context;
+        private readonly IStoreRepository _storeRepository;
 
         public string Username { get; set; }
         public string Role { get; set; }
         [BindProperty]
         [Required]
         public Account AccountInfo { get; set; }
+        public IList<Store> Store { get; set; }
         public Account Account { get; set; }
         public string Msg { get; set; }
-        public EditModel(IAccountRepository accountRepository, BookStoreDBContext context)
+        public EditModel(IAccountRepository accountRepository, BookStoreDBContext context, IStoreRepository storeRepository)
         {
             _accountRepository = accountRepository;
             _context = context;
+            _storeRepository = storeRepository;
         }
         public async Task<IActionResult> OnGetAsync(int id)
         {
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
+            Store = _storeRepository.GetStoresNoDes();
             ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name");
             ViewData["StoreId"] = new SelectList(_context.Stores, "Id", "Name");
             if (id == null)
@@ -51,6 +56,7 @@ namespace BookStoreApp.Pages.Admin.AccountPage
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
+            Store = _storeRepository.GetStoresNoDes();
             ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name");
             ViewData["StoreId"] = new SelectList(_context.Stores, "Id", "Name");
             if (!ModelState.IsValid)

@@ -1,0 +1,74 @@
+﻿@page
+@model BookStoreApp.Pages.Admin.OrderPage.IndexModel
+@{
+}
+@if(@Model.Role == "1")
+{
+    if(@Model.Msg != null)
+{
+    <p style="color: red">@Model.Msg</p>
+}
+<h1>Orders</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].TotalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].ShippingAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].OrderStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Staff)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="list-wrapper">
+@foreach (var item in Model.Order) {
+        <tr class="list-item">
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippingAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Staff.Name)
+            </td>
+            <td>
+@*                <a asp-page="./Edit" asp-route-id="@item.Id"><i class='fas fa-pen'></i></a> |*@
+                <a asp-page="/Admin/OrderDetailPage/Index" asp-route-id="@item.Id"><i class='fas fa-info'></i></a>
+@*                <a asp-page="./Delete" asp-route-id="@item.Id"><i class='fas fa-trash'></i></a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<p>
+    <a class="btn btn-primary" asp-page="Create">Create New</a>
+</p>
+<div id="pagination-container"></div>
+}
+else
+{
+    Response.Redirect("/Login/LoginPage");
+}

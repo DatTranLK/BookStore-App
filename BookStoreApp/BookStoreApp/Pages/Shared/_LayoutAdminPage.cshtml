@@ -79,40 +79,51 @@
             <div class="sidebar-heading">
                 Admin
             </div>
-            <li class="nav-item">
+            <li class="nav-item" style="color: white">
                 <a class="nav-link" asp-page="/Admin/BookPage/Index">
-                    <i class="fas fa-fw fa-book"></i>
+                    <i style="color: white" class="fas fa-fw fa-book"></i>
                     <span>Books</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+            <li class="nav-item" style="font-size: .85rem;color: white; margin-left: 15px; padding: 10px 0;">
+                @*<a class="nav-link" asp-page="/Admin/BookInStorePage/Index">
                     <i class="fas fa-fw fa-store-alt"></i>
-                    <span>Book In Stores</span></a>
+                    <span>Book In Stores</span></a>*@
+@*                    <div class="dropdown">*@
+                      <a data-toggle="dropdown"><i class="fas fa-fw fa-store-alt"></i>
+                    <span style="padding-left: 5px">Book In Stores <i class="fas fa-fw fa-caret-down"></i></span></a>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        @foreach (var item in Model.Store)
+                        {
+                            <li role="presentation"><a role="menuitem" tabindex="-1" asp-page="/Admin/BookInStorePage/Index" asp-route-id="@item.Id">@item.Name</a></li>
+                        }
+                      </ul>
+@*                    </div>*@
             </li>
+            
             <!-- Nav Item - Pages Collapse Menu -->
-           <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-shopping-cart"></i>
+           <li class="nav-item" style="color: white">
+                <a class="nav-link" asp-page="/Admin/OrderPage/Index">
+                    <i style="color: white" class="fas fa-fw fa-shopping-cart"></i>
                     <span>Orders</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" style="color: white">
                 <a class="nav-link" asp-page="/Admin/AccountPage/Index">
-                    <i class="fas fa-fw fa-user"></i>
+                    <i style="color: white" class="fas fa-fw fa-user"></i>
                     <span>Accounts</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" style="color: white">
                 <a class="nav-link" asp-page="/Admin/PublisherPage/Index">
-                    <i class="fas fa-fw fa-university"></i>
+                    <i style="color: white" class="fas fa-fw fa-university"></i>
                     <span>Publisher</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" style="color: white">
                 <a class="nav-link" asp-page="/Admin/CategoryPage/Index">
-                    <i class="fas fa-fw fa-list-alt"></i>
+                    <i style="color: white" class="fas fa-fw fa-list-alt"></i>
                     <span>Category</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" style="color: white">
                 <a class="nav-link" asp-page="/Admin/StorePage/Index">
-                    <i class="fas fa-fw fa-store"></i>
+                    <i style="color: white" class="fas fa-fw fa-store"></i>
                     <span>Store</span></a>
             </li>
             <!-- Nav Item - Utilities Collapse Menu -->
