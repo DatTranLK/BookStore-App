@@ -138,6 +138,7 @@ namespace BookStoreApp.Pages
             int customerId = _accountRepository.GetIdByUsername(Username);
             var order = new Order();
             order.CreateDate = DateTime.Now;
+            order.StaffId = null;
             order.CustomerId = customerId;
             order.StaffId = null;
             order.ShippingAddress = ShippingAddressString;           

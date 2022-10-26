@@ -208,5 +208,22 @@ namespace DataAccessObject
                 throw new Exception(e.Message);
             }
         }
+
+        public bool CheckUserByUsername(string username)
+        {
+            try
+            {
+                var acc = _dBContext.Accounts.FirstOrDefault(a => a.Name == username);
+                if (acc != null)
+                {
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return false;
+        }
     }
 }

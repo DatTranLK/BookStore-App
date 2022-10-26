@@ -58,7 +58,6 @@ namespace DataAccessObject
             try
             {
                 order.OrderStatus = "Done";
-                order.StaffId = null;
                 _dbContext.Orders.Add(order);
                 _dbContext.SaveChanges();
 

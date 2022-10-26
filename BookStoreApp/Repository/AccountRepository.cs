@@ -12,6 +12,8 @@ namespace Repository
     {
         public Account CheckLogin(string username, string password) => AccountDAO.Instance.CheckLogin(username, password);
 
+        public bool CheckUserByUsername(string username) => AccountDAO.Instance.CheckUserByUsername(username);
+
         public void CreateNewAccount(Account account) => AccountDAO.Instance.CreateNewAccount(account);
 
         public Account GetAccountById(int id) => AccountDAO.Instance.GetAccountById(id);

@@ -1,0 +1,68 @@
+﻿@page
+@model BookStoreApp.Pages.Seller.CartSellerModel
+
+<table border="1" class="table table-hover">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Avatar</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Sub Total</th>
+        <th>Delete</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var item in Model.cartSeller)
+    {
+        Model.Total += item.Book.Price * item.Quantity;
+        <tr>
+            <td>@item.Book.Id</td>
+            <td>@item.Book.Name</td>
+            <td><img src="@item.Book.Avatar" width="120" height="100" /></td>
+            <td>@item.Book.Price</td>
+            <td>@item.Quantity</td>
+            <td>@(item.Book.Price * item.Quantity)</td>
+            <td>
+                <a asp-page="cartSeller" asp-page-handler="delete" asp-route-id="@item.Book.Id">X</a>
+            </td>
+            <td>
+                <a class="btn btn-outline-secondary" asp-page="cartSeller" asp-page-handler="increase" asp-route-id="@item.Book.Id"><i class="fas fa-fw fa-plus"></i></a>
+                <a class="btn btn-outline-secondary" asp-page="cartSeller" asp-page-handler="decrease" asp-route-id="@item.Book.Id"><i class="fas fa-fw fa-minus"></i></a>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="5" align="center">
+            Total
+        </td>
+        <td>
+            @Model.Total
+        </td>
+    </tr>
+</table>
+
+<form method="post">
+    <div class="input-group-append">
+        <label asp-for="@Model.CustomerName" style="margin-top: 7px;"></label>
+        <input asp-for="@Model.CustomerName" class="form-control" style="width: 300px; margin-left: 10px; margin-right: 100px" name="SubCustomerName"/>
+        <span asp-validation-for="@Model.CustomerName" class="text-danger"></span>
+        <br/>
+        
+        <input type="text" name="SubTotal" value="@Model.Total" hidden />
+        <button class="btn btn-primary" asp-for="@Model.Total" type="submit" style="margin-left: 1000px; padding: 10px;">Checkout</button>
+
+    </div>
+</form>
+<a asp-page="./BookView" class="btn btn-primary" style="padding: 10px; text-align:center; margin-top: 50px; margin-left: -1600px">Continue shopping</a>
+@if (@Model.Msg != null)
+{
+    <div>
+        <span style="color: red; margin-left: 300px;">@Model.Msg</span>
+    </div>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
