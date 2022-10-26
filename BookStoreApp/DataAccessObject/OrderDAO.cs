@@ -19,14 +19,15 @@ namespace DataAccessObject
         }
         public static OrderDAO Instance
         {
-            get {
+            get
+            {
                 lock (instanceLock)
                 {
                     if (instance == null)
-                    { 
+                    {
                         instance = new OrderDAO();
                     }
-                    return instance; 
+                    return instance;
                 }
             }
         }
@@ -51,5 +52,23 @@ namespace DataAccessObject
                 throw new Exception(ex.Message);
             }
         }
+
+        public int CreateNewOrder(Order order)
+        {
+            try
+            {
+                order.OrderStatus = "Done";
+                order.StaffId = null;
+                _dbContext.Orders.Add(order);
+                _dbContext.SaveChanges();
+
+                return order.Id;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
     }
 }

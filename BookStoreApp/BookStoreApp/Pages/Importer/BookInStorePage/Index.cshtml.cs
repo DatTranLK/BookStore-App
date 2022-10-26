@@ -37,9 +37,7 @@ namespace BookStoreApp.Pages.Importer.BookInStorePage
             Account = _accountRepository.GetAccountByUsername(Username);
             Store = _storeRepository.GetStoresNoDes();
             StoreId = id;
-            HttpContext.Session.SetString("StoreId", id.ToString());
             BookInStore = _bookInStoreRepository.GetBookInStores(id);
-            HttpContext.Session.SetString("Storeee", id.ToString());
             if (BookInStore == null)
             {
                 Msg = "There is no BookInStore in here";

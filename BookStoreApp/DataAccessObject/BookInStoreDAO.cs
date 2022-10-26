@@ -19,7 +19,8 @@ namespace DataAccessObject
         }
         public static BookInStoreDAO Instance
         {
-            get {
+            get
+            {
                 lock (instanceLock)
                 {
                     if (instance == null)
@@ -60,7 +61,7 @@ namespace DataAccessObject
                     .Include(x => x.Book)
                     .FirstOrDefault(x => x.Id == id);
                 if (bis != null)
-                { 
+                {
                     return bis;
                 }
                 return null;
@@ -82,6 +83,40 @@ namespace DataAccessObject
                     _dbContext.BookInStores.Add(bookInStore);
                     _dbContext.SaveChanges();
                 }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+        public bool ImportBookToStore(int amount, int storeId, int bookId)
+        {
+            try
+            {
+                var store = _dbContext.Stores.FirstOrDefault(x => x.Id == storeId);
+                if (store != null)
+                {
+                    var bookInStore = _dbContext.BookInStores.FirstOrDefault(x => x.BookId == bookId && store.Id == storeId);
+                    var book = _dbContext.Books.FirstOrDefault(x => x.Id == bookId);
+                    if (bookInStore != null)
+                    {
+                        if (book.Amount - amount >= 0)
+                        {
+                            book.Amount -= amount;
+                            _dbContext.SaveChanges();
+                            bookInStore.Amount += amount;
+                            _dbContext.SaveChanges();
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+
             }
             catch (Exception ex)
             {

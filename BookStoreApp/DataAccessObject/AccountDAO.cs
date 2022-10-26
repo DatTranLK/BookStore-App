@@ -36,7 +36,6 @@ namespace DataAccessObject
                 if(!string.IsNullOrEmpty(username) || !string.IsNullOrEmpty(password))
                 {
                     username = username.Trim();
-                    password = password.Trim();
                     var account = _dBContext.Accounts.FirstOrDefault(x => x.Username == username && x.Password == password);
                     if (account != null)
                     {

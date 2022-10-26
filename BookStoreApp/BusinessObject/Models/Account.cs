@@ -13,6 +13,7 @@ namespace BusinessObject.Models
             OrderStaffs = new HashSet<Order>();
             RequestBooks = new HashSet<RequestBook>();
         }
+
         public Account(string username, string password)
         {
             Username = username;

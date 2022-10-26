@@ -10,6 +10,8 @@ namespace Repository
 {
     public class OrderRepository : IOrderRepository
     {
+        public int CreateNewOrder(Order order) => OrderDAO.Instance.CreateNewOrder(order);
+
         public List<Order> GetOrders() => OrderDAO.Instance.GetOrders();
     }
 }

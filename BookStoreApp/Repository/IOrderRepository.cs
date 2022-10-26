@@ -10,5 +10,6 @@ namespace Repository
     public interface IOrderRepository
     {
         List<Order> GetOrders();
+        int CreateNewOrder(Order order);
     }
 }

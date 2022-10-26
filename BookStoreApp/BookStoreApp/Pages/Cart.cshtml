@@ -51,9 +51,17 @@
             <label asp-for="@Model.ShippingAddress"></label>
             <input asp-for="@Model.ShippingAddress" class="form-control" style="width: 300px; margin-left: 10px; margin-right: 100px" name="SubShippingAddr" required/>
             <span asp-validation-for="@Model.ShippingAddress" class="text-danger"></span>
-
+            @if(Model.cartCus == null)
+            {
+            <input type="text" name="SubTotal" value="@Model.Total" hidden />
+            <button class="btn btn-primary" asp-for="@Model.Total" type="submit" style="margin-left: 1230px" disabled>Checkout</button>
+            }
+            else
+            {
             <input type="text" name="SubTotal" value="@Model.Total" hidden />
             <button class="btn btn-primary" asp-for="@Model.Total" type="submit" style="margin-left: 1230px">Checkout</button>
+            }
+           
         </div>
     </form>
     <a asp-page="index" class="btn btn-primary" style="padding: 10px; text-align:center;">Continue shopping</a>
