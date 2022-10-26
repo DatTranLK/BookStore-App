@@ -79,7 +79,7 @@
                         @if (@Model.Username != null)
                         {
                         <div style="padding-bottom: 30px">
-                            <a href="" class="btn btn-warning">
+                            <a class="btn btn-warning" asp-page="./Cart" asp-route-id="@item.Id">
                                 Add To Cart
                             </a>
                             </div>

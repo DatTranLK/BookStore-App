@@ -16,17 +16,20 @@ namespace BookStoreApp.Pages.Importer.ImportPage
         private readonly IAccountRepository _accountRepository;
         private readonly IRequestBookRepository _requestBook;
         private readonly IRequestBookDetailRepository _requestBookDetailRepository;
+        private readonly IStoreRepository _storeRepository;
 
         public string Username { get; set; }
         public string Role { get; set; }
         public List<Item> cart { get; set; }
+        public IList<Store> Store { get; set; }
 
-        public ImportModel(IBookRepository bookRepository, IAccountRepository accountRepository, IRequestBookRepository requestBook, IRequestBookDetailRepository requestBookDetailRepository)
+        public ImportModel(IBookRepository bookRepository, IAccountRepository accountRepository, IRequestBookRepository requestBook, IRequestBookDetailRepository requestBookDetailRepository, IStoreRepository storeRepository)
         {
             _bookRepository = bookRepository;
             _accountRepository = accountRepository;
             _requestBook = requestBook;
             _requestBookDetailRepository = requestBookDetailRepository;
+            _storeRepository = storeRepository;
         }
         public Account Account { get; set; }
 
@@ -36,6 +39,7 @@ namespace BookStoreApp.Pages.Importer.ImportPage
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
+            Store = _storeRepository.GetStoresNoDes();
             cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             var book = _bookRepository.GetBookById(id);
             if (cart == null)
@@ -74,6 +78,7 @@ namespace BookStoreApp.Pages.Importer.ImportPage
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
+            Store = _storeRepository.GetStoresNoDes();
             cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             int index = Exists(cart, id);
             cart.RemoveAt(index);
@@ -96,9 +101,10 @@ namespace BookStoreApp.Pages.Importer.ImportPage
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
+            Store = _storeRepository.GetStoresNoDes();
             cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             int index = Exists(cart, id);
-            cart[index].Quantity++;          
+            cart[index].Quantity++;
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
         }
 
@@ -107,6 +113,7 @@ namespace BookStoreApp.Pages.Importer.ImportPage
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
+            Store = _storeRepository.GetStoresNoDes();
             cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             int index = Exists(cart, id);
             cart[index].Quantity--;
@@ -122,6 +129,7 @@ namespace BookStoreApp.Pages.Importer.ImportPage
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
+            Store = _storeRepository.GetStoresNoDes();
             cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             int staffId = _accountRepository.GetIdByUsername(Username);
             var request = new RequestBook();

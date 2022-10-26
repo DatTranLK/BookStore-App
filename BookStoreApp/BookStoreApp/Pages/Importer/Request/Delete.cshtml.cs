@@ -13,16 +13,20 @@ namespace BookStoreApp.Pages.Importer.Request
         private readonly IAccountRepository _accountRepository;
         private readonly IRequestBookDetailRepository _bookDetailRepository;
         private readonly IRequestBookRepository _bookRepository;
+        private readonly IStoreRepository _storeRepository;
+
         public string Username { get; set; }
         public string Role { get; set; }
         public string Msg { get; set; }
         public Account Account { get; set; }
         public RequestBook RequestBook { get; set; }
-        public DeleteModel(IAccountRepository accountRepository, IRequestBookDetailRepository bookDetailRepository, IRequestBookRepository bookRepository)
+        public IList<Store> Store { get; set; }
+        public DeleteModel(IAccountRepository accountRepository, IRequestBookDetailRepository bookDetailRepository, IRequestBookRepository bookRepository, IStoreRepository storeRepository)
         {
             _accountRepository = accountRepository;
             _bookDetailRepository = bookDetailRepository;
             _bookRepository = bookRepository;
+            _storeRepository = storeRepository;
         }
 
         public async Task<IActionResult> OnGetAsync(int id)
@@ -30,6 +34,7 @@ namespace BookStoreApp.Pages.Importer.Request
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
+            Store = _storeRepository.GetStoresNoDes();
             if (id == null)
             {
                 Msg = "Not Found!";

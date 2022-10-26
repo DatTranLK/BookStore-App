@@ -162,10 +162,15 @@ namespace BusinessObject.Models
             {
                 entity.ToTable("OrderDetail");
 
+                entity.HasOne(d => d.Book)
+                    .WithMany(p => p.OrderDetails)
+                    .HasForeignKey(d => d.BookId)
+                    .HasConstraintName("FK_OrderDetail_Book");
+
                 entity.HasOne(d => d.BookInStore)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.BookInStoreId)
-                    .HasConstraintName("FK_OrderDetail_Book");
+                    .HasConstraintName("FK_OrderDetail_BookInStore");
 
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderDetails)

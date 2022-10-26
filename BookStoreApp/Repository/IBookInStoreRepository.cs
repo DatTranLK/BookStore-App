@@ -13,5 +13,6 @@ namespace Repository
         BookInStore GetBookInStore(int id);
         void CreateNewBookInStore(BookInStore bookInStore, Book bookById);
         void UpdateBookInStore(BookInStore bookInStore, Book bookById);
+        bool ImportBookToStore(int amount, int storeId, int bookId);
     }
 }
