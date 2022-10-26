@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -54,6 +55,31 @@ namespace DataAccessObject
                 throw new Exception(e.Message);
             }
         }
+
+        public void AddNewOrderDetailForSeller(int quantity, int orderId, int bookInStoreId, int bookId)
+        {
+            try
+            {
+                var orderDetail = new OrderDetail();
+                orderDetail.Quantity = quantity;
+                orderDetail.BookInStoreId = bookInStoreId;
+                orderDetail.BookId = bookId;
+                orderDetail.OrderId = orderId;
+                _dbContext.OrderDetails.Add(orderDetail);
+                _dbContext.SaveChanges();
+                var book = _dbContext.Books.FirstOrDefault(x => x.Id == bookId);
+                if (book != null)
+                {
+                    book.Amount -= quantity;
+                    _dbContext.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public List<OrderDetail> GetOrderDetailDAOs(int orderId)
         {
             try

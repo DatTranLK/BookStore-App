@@ -88,9 +88,6 @@ namespace BookStoreApp.Pages.Importer.BookInStorePage
                     HttpContext.Session.SetString("CheckStore2", storeId.ToString());
                 }
             }
-
-
-
         }
 
         public void OnGetDelete(int id, int storeId)

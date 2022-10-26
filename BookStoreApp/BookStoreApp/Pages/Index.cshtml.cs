@@ -69,6 +69,7 @@ namespace BookStoreApp.Pages
         {
             HttpContext.Session.Remove("Username");
             HttpContext.Session.Remove("Role");
+            HttpContext.Session.Remove("cartCus");
             return RedirectToPage("/Login/LoginPage");
         }
 

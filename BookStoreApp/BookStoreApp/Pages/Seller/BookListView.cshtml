@@ -1,8 +1,8 @@
 ﻿@page
 @model BookStoreApp.Pages.Seller.BookListViewModel
-@{
-}   
-<h1>Book In Store</h1>
+
+<h1>Book in store</h1>
+
 <table class="table">
     <thead>
         <tr>
@@ -39,7 +39,7 @@
                     @Html.DisplayFor(modelItem => item.Amount)
                 </td>
                 <td>
-                    <a asp-page="/" asp-route-id="@item.Id">Add to card</a> |
+                    <a asp-page="./CartSeller" asp-route-id="@item.Id">Add to card</a> |
                     <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                 </td>
             </tr>
