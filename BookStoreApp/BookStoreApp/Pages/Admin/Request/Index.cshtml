@@ -1,0 +1,64 @@
+﻿@page
+@model BookStoreApp.Pages.Admin.Request.IndexModel
+
+@if (@Model.Role == "1")
+{
+   if(@Model.Msg != null)
+    {
+        <p style="color: red">@Model.Msg</p>
+    }
+    <h1>Import History</h1>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequestBooks[0].Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequestBooks[0].AddBookState)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequestBooks[0].CreateDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequestBooks[0].AcceptedImport)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequestBooks[0].StaffId)
+                </th>              
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="list-wrapper">
+    @foreach (var item in Model.RequestBooks) {
+            <tr class="list-item">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddBookState)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AcceptedImport)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StaffId)
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.Id"><i class='fas fa-info'></i></a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id"><i class='fas fa-trash'></i></a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+    <div id="pagination-container"></div>
+}
+else
+{
+    <p>You do not have permission to access</p>
+}

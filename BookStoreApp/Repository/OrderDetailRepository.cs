@@ -17,6 +17,10 @@ namespace Repository
 
         public OrderDetail GetOrderDetailById(int id) => OrderDetailDAO.Instance.GetOrderDetailById(id);
         public List<OrderDetail> GetOrderDetailDAOs(int orderId) => OrderDetailDAO.Instance.GetOrderDetailDAOs(orderId);
+
+        public List<OrderDetail> GetOrderDetailDAOsVerCustomer(int orderId) => OrderDetailDAO.Instance.GetOrderDetailDAOsVerCustomer(orderId);
+
         public void RemoveOrderDetail(int id) => OrderDetailDAO.Instance.RemoveOrderDetail(id);
+
     }
 }

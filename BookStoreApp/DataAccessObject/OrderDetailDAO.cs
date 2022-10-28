@@ -103,6 +103,29 @@ namespace DataAccessObject
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<OrderDetail> GetOrderDetailDAOsVerCustomer(int orderId)
+        {
+            try
+            {
+                var orderDetails = _dbContext.OrderDetails
+                    .Include(x => x.Book)
+                    .Include(x => x.Order)
+                    .Where(x => x.OrderId == orderId && x.BookInStoreId == null)
+                    .OrderByDescending(x => x.Id)
+                    .ToList();
+                if (orderDetails != null)
+                {
+                    return orderDetails;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
         public OrderDetail GetOrderDetailById(int id)
         {
             try

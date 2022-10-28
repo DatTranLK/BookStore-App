@@ -1,0 +1,59 @@
+﻿@page
+@model BookStoreApp.Pages.Admin.ImportBookToStore.IndexModel
+
+@if (@Model.Role == "1")
+{
+    if (@Model.Msg != null)
+    {
+        <p style="color: red">@Model.Msg</p>
+    }
+    <h1>Book In Store</h1>
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.BookInStore[0].Book)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookInStore[0].Store)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookInStore[0].Amount)
+                </th>
+                <th>
+                    Amount Of Warehouse
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="list-wrapper">
+            @foreach (var item in Model.BookInStore)
+            {
+                <tr class="list-item">
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Book.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Store.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Book.Amount)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-page="./ImportBookInStore" asp-route-id="@item.BookId" asp-route-storeId="@Model.StoreId">Add to import</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div id="pagination-container"></div>
+}
+else
+{
+    Response.Redirect("/Login/LoginPage");
+}

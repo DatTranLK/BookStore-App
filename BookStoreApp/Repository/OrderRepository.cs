@@ -12,6 +12,10 @@ namespace Repository
     {
         public int CreateNewOrder(Order order) => OrderDAO.Instance.CreateNewOrder(order);
 
+        public List<Order> GetOrderByCustomerID(int id) => OrderDAO.Instance.GetOrderByCustomerID(id);
+
+        public List<Order> GetOrderByStaffID(int id) => OrderDAO.Instance.GetOrderByStaffID(id);
+
         public List<Order> GetOrders() => OrderDAO.Instance.GetOrders();
     }
 }
