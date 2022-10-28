@@ -1,0 +1,52 @@
+﻿@page
+@model BookStoreApp.Pages.Seller.OrderDetailPage.DetailsModel
+@{
+}
+@if(@Model.Role == "3")
+{
+
+<div>
+    <h1>Details OrderDetail</h1>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderDetail.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderDetail.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderDetail.BookInStore.Book)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderDetail.BookInStore.Book.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderDetail.BookInStore.Store)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderDetail.BookInStore.Store.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderDetail.Order)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderDetail.Order.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderDetail.Quantity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderDetail.Quantity)
+        </dd>
+    </dl>
+    <div>
+        <a asp-page="./Index" asp-route-id="@Model.OrderDetail.OrderId">Back to List</a>
+    </div>
+</div>
+
+
+}
+else{
+    Response.Redirect("/Login/LoginPage");
+}

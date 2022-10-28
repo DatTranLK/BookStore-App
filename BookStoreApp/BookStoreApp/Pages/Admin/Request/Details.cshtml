@@ -1,0 +1,57 @@
+﻿@page
+@model BookStoreApp.Pages.Admin.Request.DetailsModel
+
+@if (@Model.Role == "1")
+{
+    <h1>Import Details</h1>
+
+    if (@Model.Msg != null)
+    {
+        <p style="color: red">@Model.Msg</p>
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequestBookDetail[0].Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequestBookDetail[0].Book)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequestBookDetail[0].RealQuantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequestBookDetail[0].RequestBookId)
+                </th>
+            </tr>
+        </thead>
+        <tbody class="list-wrapper">
+            @foreach (var item in Model.RequestBookDetail)
+            {
+                <tr class="list-item">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Book.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RealQuantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestBookId)
+                    </td>                   
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+}
+else
+{
+    Response.Redirect("/Login/LoginPage");
+}

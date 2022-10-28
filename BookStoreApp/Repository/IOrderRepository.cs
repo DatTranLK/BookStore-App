@@ -11,5 +11,8 @@ namespace Repository
     {
         List<Order> GetOrders();
         int CreateNewOrder(Order order);
+        List<Order> GetOrderByStaffID(int id);
+        List<Order> GetOrderByCustomerID(int id);
+
     }
 }

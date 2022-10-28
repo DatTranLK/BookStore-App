@@ -69,5 +69,42 @@ namespace DataAccessObject
             }
         }
 
+        public List<Order> GetOrderByStaffID(int id)
+        {
+            try
+            {
+                var order = _dbContext.Orders.Where(o => o.StaffId == id)
+                    .Include(x => x.Staff)
+                    .ToList();
+                if (order != null)
+                {
+                    return order;
+                }
+                return null;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
+        public List<Order> GetOrderByCustomerID(int id)
+        {
+            try
+            {
+                var order = _dbContext.Orders.Where(o => o.CustomerId == id && o.StaffId == null).ToList();
+                if (order != null)
+                {
+                    return order;
+                }
+                return null;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

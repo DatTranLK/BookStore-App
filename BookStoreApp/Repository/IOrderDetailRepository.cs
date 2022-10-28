@@ -14,5 +14,6 @@ namespace Repository
         OrderDetail GetOrderDetailById(int id);
         void RemoveOrderDetail(int id);
         void AddNewOrderDetailForSeller(int quantity, int orderId, int bookInStoreId, int bookId);
+        List<OrderDetail> GetOrderDetailDAOsVerCustomer(int orderId);
     }
 }
