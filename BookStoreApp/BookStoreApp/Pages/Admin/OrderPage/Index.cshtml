@@ -8,7 +8,19 @@
 {
     <p style="color: red">@Model.Msg</p>
 }
-<h1>Orders</h1>
+
+    <div>
+        <h1>Orders</h1>
+        <div class="row justify-content-center" style="margin-left: 1px;">
+            <form class="form-inline">
+                <div class="form-group">
+                    <input asp-for="SearchString" type="text" style="margin-right: 30px; padding: 5px; width: 650px;" placeholder="Search by Customer Name, Create Date, Total Price, Shipping Address ..." />
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 <table class="table">
     <thead>
         <tr>

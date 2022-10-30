@@ -10,7 +10,18 @@
     {
         <p style="color: red">@Model.Msg</p>
     }
-    <h1>Book</h1>
+    <div>
+        <h1>Book</h1>
+        <div class="row justify-content-center" style="margin-left: 1px;">
+            <form class="form-inline">
+                <div class="form-group">
+                    <input asp-for="SearchString" type="text" style="margin-right: 30px; padding: 5px; width: 650px;" placeholder="Search by ISBN, Book  Name, Author Name, Price ..." />
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     
     <table class="table">
         <thead>
@@ -21,9 +32,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Book[0].Name)
                 </th>
-                @*<th>
+                <th>
                     @Html.DisplayNameFor(model => model.Book[0].Author)
-                </th>*@
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Book[0].ReleaseYear)
                 </th>
@@ -54,9 +65,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                @*<td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Author)
-                </td>*@
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ReleaseYear)
                 </td>
@@ -76,8 +87,12 @@
                     @Html.DisplayFor(modelItem => item.Publisher.Name)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id"><i class='fas fa-pen'></i></a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id"><i class='fas fa-info'></i></a> |
+                    <a asp-page="./Edit" asp-route-id="@item.Id"><i class='fas fa-pen'></i></a> 
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.Id"><i class='fas fa-info'></i></a> 
+                </td>
+                <td>
                     <a asp-page="./Delete" asp-route-id="@item.Id"><i class='fas fa-trash'></i></a>
                 </td>
             </tr>

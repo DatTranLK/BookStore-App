@@ -2,8 +2,11 @@ using BusinessObject.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BookStoreApp.Pages.Admin.AccountPage
 {
@@ -19,12 +22,16 @@ namespace BookStoreApp.Pages.Admin.AccountPage
             _accountRepository = accountRepository;
             _storeRepository = storeRepository;
         }
-        public IList<Account> Accounts { get; set; }
+        public List<Account> Accounts { get; set; }
         public IList<Store> Store { get; set; }
         public Account Account { get; set; }
         public string Msg { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
         public void OnGet()
         {
+            Accounts = new List<Account>();
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
@@ -34,6 +41,13 @@ namespace BookStoreApp.Pages.Admin.AccountPage
             {
                 Msg = "There is no account in here";
             }
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                List<Account> accountSearchList = _accountRepository.SearchAccount(SearchString.Trim()).ToList();
+                Accounts = accountSearchList;
+            }
         }
+
+
     }
 }

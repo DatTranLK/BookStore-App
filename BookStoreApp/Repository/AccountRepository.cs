@@ -28,6 +28,9 @@ namespace Repository
 
         public void RemoveAccount(int id) => AccountDAO.Instance.RemoveAccount(id);
 
+        public List<Account> SearchAccount(string searchString) => AccountDAO.Instance.SearchAccount(searchString);
+
         public void UpdateAccount(Account account) => AccountDAO.Instance.UpdateAccount(account);
+
     }
 }

@@ -3,6 +3,9 @@
 
 @if (@Model.Role == "2")
 {
+    <div>
+
+ 
         <table border="1" class="table table-hover">
             <tr>
                 <th>Id</th>
@@ -34,8 +37,8 @@
             <button class="btn btn-primary btn-lg">Import</button>
         </form>
         <br/>
-    <a asp-page="index" class="btn btn-primary" style="margin-left: -1600px; padding: 10px; text-align:center;">Continue Import</a>
-
+        <a asp-page="index" class="btn btn-primary" style="margin-left: -1600px; padding: 10px; text-align:center;">Continue Import</a>
+    </div>
 }
 else
 {

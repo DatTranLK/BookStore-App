@@ -6,65 +6,118 @@
 <link href="~/css/responsive.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="~/css/style2.css">
-    <table border="1" class="table table-hover">
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Avatar</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Sub Total</th>
-            <th>Delete</th>
-            <th>Action</th>
-        </tr>
-    @foreach (var item in Model.cartCus)
-        {
-        Model.Total += item.Book.Price * item.Quantity;
-            <tr>
-                <td>@item.Book.Id</td>
-                <td>@item.Book.Name</td>
-                <td><img src="@item.Book.Avatar" width="120" height="100" /></td>
-                <td>@item.Book.Price</td>
-                <td>@item.Quantity</td>
-                <td>@(item.Book.Price * item.Quantity)</td>
-                <td>
-                    <a asp-page="cart" asp-page-handler="delete" asp-route-id="@item.Book.Id">X</a>
-                </td>
-                <td>
-                    <a class="btn btn-outline-secondary" asp-page="cart" asp-page-handler="increase" asp-route-id="@item.Book.Id"><i class="fas fa-fw fa-plus"></i></a>
-                    <a class="btn btn-outline-secondary" asp-page="cart" asp-page-handler="decrease" asp-route-id="@item.Book.Id"><i class="fas fa-fw fa-minus"></i></a>
-                </td>
-            </tr>
-        }
-        <tr>
-            <td colspan="5" align="center">
-                Total
-            </td>
-            <td>
-                @Model.Total
-            </td>
-        </tr>
-    </table>
+<link rel="stylesheet" href="~/css/CartStyle.css">
 
-    <form method="post">
-        <div class="input-group-append">
-            <label asp-for="@Model.ShippingAddress"></label>
-            <input asp-for="@Model.ShippingAddress" class="form-control" style="width: 300px; margin-left: 10px; margin-right: 100px" name="SubShippingAddr" required/>
-            <span asp-validation-for="@Model.ShippingAddress" class="text-danger"></span>
-            @if(Model.cartCus == null)
-            {
-            <input type="text" name="SubTotal" value="@Model.Total" hidden />
-            <button class="btn btn-primary" asp-for="@Model.Total" type="submit" style="margin-left: 1230px" disabled>Checkout</button>
-            }
-            else
-            {
-            <input type="text" name="SubTotal" value="@Model.Total" hidden />
-            <button class="btn btn-primary" asp-for="@Model.Total" type="submit" style="margin-left: 1230px">Checkout</button>
-            }
-           
+  <section class="h-100 h-custom" style="background-color: #d2c9ff;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
+        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+          <div class="card-body p-0">
+            <div class="row g-0">
+              <div class="col-lg-8">
+                <div class="p-5">
+                  <div class="d-flex justify-content-between align-items-center mb-5">
+                    <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
+                  </div>
+
+                @foreach (var item in Model.cartCus)
+                {
+                    Model.Total += item.Book.Price * item.Quantity;
+                  <hr class="my-4">
+                  <div class="row mb-4 d-flex justify-content-between align-items-center">
+                    <div class="col-md-2 col-lg-2 col-xl-2">
+                      <img src="@item.Book.Avatar"
+                        class="img-fluid rounded-3" alt="Book ava">
+                    </div>
+
+                    <div class="col-md-3 col-lg-3 col-xl-3">
+                      <h6 class="text-muted">@item.Book.Name</h6>
+                      <h6 class="text-black mb-0">@item.Book.Price</h6>
+                    </div>
+
+                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+
+                    <a class="btn" asp-page="cart"
+                    asp-page-handler="decrease" asp-route-id="@item.Book.Id">
+                    <i class="fas fa-fw fa-minus"></i></a>
+
+
+                     <div class="border" style="padding: 5px; width:60px;">@item.Quantity</div>
+
+                    <a class="btn"
+                    asp-page="cart" asp-page-handler="increase"
+                    asp-route-id="@item.Book.Id"><i class="fas fa-fw fa-plus"></i></a>
+
+                    </div>
+                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                     <h6 class="mb-0">@(item.Book.Price * item.Quantity)</h6>
+                    </div>
+
+                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                      <a class="text-muted" asp-page="cart" asp-page-handler="delete" asp-route-id="@item.Book.Id"><i class="fas fa-times"></i></a>
+                    </div>
+                  </div>
+                  <hr class="my-4">
+                  }
+                  <div class="pt-5">
+                    <h6 class="mb-0">
+                        <a asp-page="index" class="text-body">
+                            <i class="fas fa-long-arrow-alt-left me-2"></i> Back to shop
+                        </a>
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 bg-grey">
+                <div class="p-5">
+                  <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                  <hr class="my-4">
+
+                    <div class="d-flex justify-content-between mb-5">
+                        <h5 class="text-uppercase">Total price</h5>
+                        <h5> @Model.Total</h5>
+                    </div>
+
+                 <hr class="my-4">
+                 <h5 class="text-uppercase mb-3">Shipping Address</h5>
+
+                <form method="post">
+                <div class="mb-5">
+                    <div class="form-outline">
+                        <textarea id="w3review" name="w3review" rows="7" cols="30" asp-for="@Model.ShippingAddress" name="SubShippingAddr" required></textarea>
+                        <span asp-validation-for="@Model.ShippingAddress" class="text-danger"></span>
+                        <label class="form-label" for="form3Examplea2">Enter your address</label>
+                    </div>
+                </div>
+
+                @if (Model.cartCus == null)
+                {
+                    <input type="text" name="SubTotal" value="@Model.Total" hidden />
+                    <button asp-for="@Model.Total" type="submit" class="btn btn-dark btn-block btn-lg"
+                        data-mdb-ripple-color="dark" disabled>
+                        Checkout
+                    </button>
+                }
+                else
+                {
+                    <input type="text" name="SubTotal" value="@Model.Total" hidden />
+                    <button asp-for="@Model.Total" type="submit" class="btn btn-dark btn-block btn-lg"
+                        data-mdb-ripple-color="dark">
+                        Checkout
+                    </button>
+                }
+                </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </form>
-    <a asp-page="index" class="btn btn-primary" style="padding: 10px; text-align:center;">Continue shopping</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 @section Scripts {
     @{

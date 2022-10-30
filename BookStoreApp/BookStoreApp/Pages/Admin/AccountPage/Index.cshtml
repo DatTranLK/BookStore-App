@@ -6,12 +6,26 @@
 {
 if(@Model.Msg != null)
 {
-    <p style="color: red">@Model.Msg</p>
+    <p style="color: red">@Model.Msg</p>  
 }
-<h1>Account</h1>
+<div>
+    <h1>Account</h1>
+    <div class="row justify-content-center" style="margin-left: 1px;">
+    <form class="form-inline">
+        <div class="form-group">
+                    <input asp-for="SearchString" type="text" style="margin-right: 30px; padding: 5px; width: 650px;" placeholder="Search by Name, Phone, Username, ID ..." />
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+    </div>
+</div>
+
 <table class="table">
     <thead>
         <tr>
+            <th>
+                 @Html.DisplayNameFor(model => model.Accounts[0].Id)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Accounts[0].Username)
             </th>
@@ -46,6 +60,9 @@ if(@Model.Msg != null)
 @foreach (var item in Model.Accounts) {
         <tr class="list-item">
             <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Username)
             </td>
             <td>
@@ -72,15 +89,15 @@ if(@Model.Msg != null)
             <td>
                 @Html.DisplayFor(modelItem => item.Store.Name)
             </td>
-            @if (item.Role.Name != "Admin")
-            {
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id"><i class='fas fa-pen'></i></a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id"><i class='fas fa-info'></i></a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id"><i class='fas fa-trash'></i></a>
+                    <a asp-page="./Edit" asp-route-id="@item.Id"><i class='fas fa-pen'></i></a> 
                 </td>
-            }
-                    
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.Id"><i class='fas fa-info'></i></a> 
+                </td>
+                <td>
+                    <a asp-page="./Delete" asp-route-id="@item.Id"><i class='fas fa-trash'></i></a>
+                </td>   
         </tr>
 }
     </tbody>

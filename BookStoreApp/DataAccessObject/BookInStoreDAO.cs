@@ -143,5 +143,10 @@ namespace DataAccessObject
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<BookInStore> SearchBookInstore(string query)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

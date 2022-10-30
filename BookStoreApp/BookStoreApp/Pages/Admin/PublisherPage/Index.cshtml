@@ -8,7 +8,19 @@
     {
         <p style="color: red">@Model.Msg</p>
     }
-    <h1>Publisher</h1>
+
+    <div>
+        <h1>Publisher</h1>
+        <div class="row justify-content-center" style="margin-left: 1px;">
+            <form class="form-inline">
+                <div class="form-group">
+                    <input asp-for="SearchString" type="text" style="margin-right: 30px; padding: 5px; width: 650px;" placeholder="Search by Name ..." />
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 <table class="table">
     <thead>
         <tr>
@@ -33,23 +45,24 @@
             @if (Model.Role != "3")
             {
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id"><i class='fas fa-pen'></i></a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id"><i class='fas fa-info'></i></a> |
+                    <a asp-page="./Edit" asp-route-id="@item.Id"><i class='fas fa-pen'></i></a> 
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.Id"><i class='fas fa-info'></i></a> 
+                </td>
+                <td>
                     <a asp-page="./Delete" asp-route-id="@item.Id"><i class='fas fa-trash'></i></a>
                 </td>
             }
-           
+         
         </tr>
 }
     </tbody>
 </table>
-    @if (@Model.Role != "3")
-    {
         <p>
         <a class="btn btn-primary" asp-page="Create">Create New</a>
         </p>
-    }
-    
+
     <div id="pagination-container"></div>
 }
 else

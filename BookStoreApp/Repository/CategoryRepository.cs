@@ -18,6 +18,8 @@ namespace Repository
 
         public Category GetCategoryById(int id) => CategoryDAO.Instance.GetCategoryById(id);
 
+        public List<Category> SearchCate(string v) => CategoryDAO.Instance.SearchCategory(v);
+
         public void UpdateCategory(Category category) => CategoryDAO.Instance.UpdateCategory(category);
     }
 }

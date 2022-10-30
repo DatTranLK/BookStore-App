@@ -14,5 +14,6 @@ namespace Repository
         void DeleteCategory(int id);
         void CreateNewCategory(Category category);
         void UpdateCategory(Category category);
+        List<Category> SearchCate(string v);
     }
 }

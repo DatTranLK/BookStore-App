@@ -8,7 +8,19 @@
     {
         <p style="color: red">@Model.Msg</p>
     }
+
+<div>
     <h1>Book In Store</h1>
+<div class="row justify-content-center" style="margin-left: 1px;">
+    <form class="form-inline"  method="post">
+        <div class="form-group">
+            <input asp-for="SearchString" type="text" style="margin-right: 30px; padding: 5px; width: 650px;" placeholder="Search by Book,Amount ..." />
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+</div>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -40,6 +52,8 @@
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+            </td>
+             <td>
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
             </td>
         </tr>

@@ -17,5 +17,7 @@ namespace Repository
         public List<Order> GetOrderByStaffID(int id) => OrderDAO.Instance.GetOrderByStaffID(id);
 
         public List<Order> GetOrders() => OrderDAO.Instance.GetOrders();
+
+        public List<Order> SearchOrder(string v) => OrderDAO.Instance.SearchOrder(v);
     }
 }

@@ -20,6 +20,8 @@ namespace Repository
 
         public void RemoveBook(int id) => BookDAO.Instance.RemoveBook(id);
 
+        public List<Book> SearchBook(string searchString) => BookDAO.Instance.SearchBook(searchString);
+
         public void UpdateBook(Book book) => BookDAO.Instance.UpdateBook(book);
     }
 }

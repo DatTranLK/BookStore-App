@@ -14,5 +14,6 @@ namespace Repository
         void RemovePublisher(int id);
         void CreateNewPublisher(Publisher publisher);
         void UpdatePublisher(Publisher publisher);
+        List<Publisher> SearchPublisher(string query);
     }
 }

@@ -8,24 +8,36 @@
     {
         <p style="color: red">@Model.Msg</p>
     }
-    <h1>Store</h1>
+
+    <div>
+        <h1>Store</h1>
+    <div class="row justify-content-center" style="margin-left: 1px;">
+    <form class="form-inline">
+        <div class="form-group">
+                    <input asp-for="SearchString" type="text" style="margin-right: 30px; padding: 5px; width: 650px;" placeholder="Search by Name,Adress ..." />
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+    </div>
+</div>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Store2[0].Name)
+                @Html.DisplayNameFor(model => model.StoreAdminList[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Store2[0].Address)
+                @Html.DisplayNameFor(model => model.StoreAdminList[0].Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Store2[0].IsActive)
+                @Html.DisplayNameFor(model => model.StoreAdminList[0].IsActive)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody class="list-wrapper">
-@foreach (var item in Model.Store2) {
+@foreach (var item in Model.StoreAdminList) {
         <tr class="list-item">
             <td>
                 @Html.DisplayFor(modelItem => item.Name)

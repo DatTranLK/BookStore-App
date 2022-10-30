@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repository;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BookStoreApp.Pages.Admin.BookInStorePage
@@ -26,8 +27,11 @@ namespace BookStoreApp.Pages.Admin.BookInStorePage
         public IList<Store> Store { get; set; }
         public Account Account { get; set; }
         public string Msg { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
         public async Task OnGetAsync(int id)
         {
+
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
@@ -36,6 +40,23 @@ namespace BookStoreApp.Pages.Admin.BookInStorePage
             if (BookInStore == null)
             {
                 Msg = "There is no BookInStore in here";
+            }
+           
+        }
+        public void OnPost(int id)
+        {
+            Username = HttpContext.Session.GetString("Username");
+            Role = HttpContext.Session.GetString("Role");
+            Account = _accountRepository.GetAccountByUsername(Username);
+            Store = _storeRepository.GetStoresNoDes();
+            BookInStore = _bookInStoreRepository.GetBookInStores(id);
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                SearchString = SearchString.Trim();
+                List<BookInStore> bookInStoreSearchList = BookInStore.Where(o => o.Book.Name.Contains(SearchString)
+                || o.Amount.ToString().Contains(SearchString)
+                ).ToList();
+                BookInStore = bookInStoreSearchList;
             }
         }
     }

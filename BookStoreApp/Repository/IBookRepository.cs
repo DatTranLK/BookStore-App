@@ -15,5 +15,6 @@ namespace Repository
         void CreateNewBook(Book book);
         void UpdateBook(Book book);
         List<Book> GetBooksInStore();
+        List<Book> SearchBook(string v);
     }
 }

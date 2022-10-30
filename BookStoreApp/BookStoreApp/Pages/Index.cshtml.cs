@@ -21,6 +21,8 @@ namespace BookStoreApp.Pages
 
         public string Username { get; set; }
         public string Role { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
 
         private readonly ILogger<IndexModel> _logger;
         private readonly IBookRepository _bookRepository;
@@ -44,26 +46,18 @@ namespace BookStoreApp.Pages
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
             Store = _storeRepository.GetStoresNoDes();
+            Books = _bookRepository.GetBooksInStore();
             if (Store == null)
             {
                 Msg = "There is no store in here";
             }
-            if(Role == "3")
+            if (!string.IsNullOrEmpty(SearchString))
             {
-                List<BookInStore> bookInStoreList = _bookInStoreRepository.GetBookInStores((int)Account.StoreId);
-                List<Book> forSale = new List<Book>();
-                foreach (BookInStore item in bookInStoreList)
-                {
-                    forSale.Add(item.Book);
-                }
-                Books = forSale;
+                List<Book> bookSearchList = _bookRepository.SearchBook(SearchString.Trim()).ToList();
+                Books = bookSearchList;
             }
-            else
-            {
-                Books = _bookRepository.GetBooksInStore();
-                
-            }
-              
+
+
         }
         public IActionResult OnGetLogout()
         {

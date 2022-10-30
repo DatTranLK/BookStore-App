@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repository;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BookStoreApp.Pages.Admin.OrderPage
 {
@@ -25,6 +26,8 @@ namespace BookStoreApp.Pages.Admin.OrderPage
         public IList<Store> Store { get; set; }
         public Account Account { get; set; }
         public string Msg { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
         public void OnGet()
         {
             Username = HttpContext.Session.GetString("Username");
@@ -35,6 +38,11 @@ namespace BookStoreApp.Pages.Admin.OrderPage
             if (Order == null)
             {
                 Msg = "There is no order in here";
+            }
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                List<Order> orderSearchList = _orderRepository.SearchOrder(SearchString.Trim()).ToList();
+                Order = orderSearchList;
             }
         }
     }

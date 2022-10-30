@@ -56,23 +56,31 @@ namespace DataAccessObject
             }
         }
 
-        public void AddNewOrderDetailForSeller(int quantity, int orderId, int bookInStoreId, int bookId)
+        public void AddNewOrderDetailForSeller(int quantity, int orderId, int StoreId, int bookId)
         {
             try
             {
                 var orderDetail = new OrderDetail();
                 orderDetail.Quantity = quantity;
-                orderDetail.BookInStoreId = bookInStoreId;
+                orderDetail.BookInStoreId = StoreId;
                 orderDetail.BookId = bookId;
                 orderDetail.OrderId = orderId;
                 _dbContext.OrderDetails.Add(orderDetail);
                 _dbContext.SaveChanges();
-                var book = _dbContext.Books.FirstOrDefault(x => x.Id == bookId);
+                BookInStore book = _dbContext.BookInStores.FirstOrDefault(x => x.StoreId == StoreId && x.BookId == bookId) ;
                 if (book != null)
                 {
+                    Console.WriteLine("quantity: " + quantity);
+                    Console.WriteLine("Bookid: " + book.Id);
+                    Console.WriteLine("book in store amount: " + book.Amount);
                     book.Amount -= quantity;
+                    _dbContext.ChangeTracker.Clear();
+                    _dbContext.Entry<BookInStore>(book).State = EntityState.Modified;
                     _dbContext.SaveChanges();
+                    book = _dbContext.BookInStores.FirstOrDefault(x => x.StoreId == StoreId && x.BookId == bookId);
+                    Console.WriteLine("book in store amount: " + book.Amount);
                 }
+                _dbContext.SaveChanges();
             }
             catch (Exception e)
             {

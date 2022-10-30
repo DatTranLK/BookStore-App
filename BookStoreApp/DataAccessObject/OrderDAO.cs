@@ -57,7 +57,7 @@ namespace DataAccessObject
         {
             try
             {
-                order.OrderStatus = "Done";
+                order.OrderStatus = "In process";
                 _dbContext.Orders.Add(order);
                 _dbContext.SaveChanges();
 
@@ -104,6 +104,31 @@ namespace DataAccessObject
             {
 
                 throw new Exception(e.Message);
+            }
+        }
+
+        public List<Order> SearchOrder(string v)
+        {
+            try
+            {
+                var orders = _dbContext.Orders.Where(o => o.Customer.Name.Contains(v) 
+                || o.CreateDate.ToString().Contains(v) 
+                || o.TotalPrice.ToString().Contains(v)
+                || o.ShippingAddress.Contains(v))
+                    .Include(o => o.Customer)
+                    .Include(o => o.Staff)
+                    .OrderByDescending(x => x.Id)
+                    .ToList();
+                if (orders != null)
+                {
+                    return orders;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
             }
         }
     }

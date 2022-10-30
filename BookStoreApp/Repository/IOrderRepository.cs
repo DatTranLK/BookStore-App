@@ -13,6 +13,6 @@ namespace Repository
         int CreateNewOrder(Order order);
         List<Order> GetOrderByStaffID(int id);
         List<Order> GetOrderByCustomerID(int id);
-
+        List<Order> SearchOrder(string v);
     }
 }

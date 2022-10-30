@@ -19,5 +19,6 @@ namespace Repository
         void UpdateAccount(Account account);
         int GetIdByUsername(string username);
         bool CheckUserByUsername(string username);
+        List<Account> SearchAccount(string searchString);
     }
 }

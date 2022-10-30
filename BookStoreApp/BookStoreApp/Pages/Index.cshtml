@@ -56,6 +56,14 @@
         <h2>
             Our <span>products</span>
         </h2>
+        <div class="row justify-content-center">
+            <form class="form-inline">
+                <div class="form-group">
+                    <input asp-for="SearchString" type="text" style="margin-right: 30px; width: 650px;" placeholder="Search by ISBN, Book  Name, Author Name, Price ..." />
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
     </div>
 }
 
@@ -63,6 +71,7 @@
         <div class="container">
             <div class="row list-wrapper">
                 @foreach(var item in Model.Books){
+
                 <div class="list-item card col-md-4" style="width: 18rem;">
                     <div  style="width: 100%; height: 60%">
                         <img class="card-img-top" src="@item.Avatar" style="width: 100%; height: 100%" alt="Card image cap">
@@ -94,14 +103,15 @@
                             </div>
                         }
                 </div>
+
+
                 }
             </div>
              <div id="pagination-container"></div>
         </div>
        
     </section>
-@if (HttpContext.Session.GetString("Role") != "3")
-{
+
     <section class="why_section layout_padding">
         <div class="container">
             <div class="heading_container heading_center">
@@ -318,36 +328,6 @@
             </div>
     </section>
 
-    <footer class="bg-dark text-center text-white" style="width: 100%">
-        <div class="container p-4 pb-0">
-            <section class="">
-                <form action="">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-auto">
-                            <p class="pt-2">
-                                <strong>Sign up for our newsletter</strong>
-                            </p>
-                        </div>
-                        <div class="col-md-5 col-12">
-                            <div class="form-outline form-white mb-4">
-                                <input type="email" id="form5Example2" class="form-control" />
-                                <label class="form-label" for="form5Example2">Email address</label>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <button type="submit" class="btn btn-outline-light mb-4">
-                                Subscribe
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </section>
-        </div>
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2022 Powered by Team J.F.F
-        </div>
-    </footer>
-    }
     
  
 

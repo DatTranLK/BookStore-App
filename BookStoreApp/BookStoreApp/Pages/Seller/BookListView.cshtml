@@ -1,8 +1,18 @@
 ﻿@page
 @model BookStoreApp.Pages.Seller.BookListViewModel
 
-<h1>Book in store</h1>
 
+<div>
+    <h1>Book In Store</h1>
+    <div class="row justify-content-start" style="margin-left: 1px;">
+        <form class="form-inline" method="post">
+            <div class="form-group">
+                <input asp-for="SearchString" type="text" style="margin-right: 30px; padding: 5px; width: 650px;" placeholder="Search by Book,Amount ..." />
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -11,6 +21,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BookInStore[0].Book)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookInStore[0].Book.Author)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BookInStore[0].Book.Price)
@@ -33,14 +46,16 @@
                     @Html.DisplayFor(modelItem => item.Book.Name)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Book.Author)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Book.Price)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Amount)
                 </td>
                 <td>
-                    <a asp-page="./CartSeller" asp-route-id="@item.Id">Add to card</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./CartSeller" asp-route-id="@item.Id">Add to card</a> 
                 </td>
             </tr>
         }

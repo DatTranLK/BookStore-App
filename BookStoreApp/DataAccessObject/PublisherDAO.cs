@@ -117,5 +117,23 @@ namespace DataAccessObject
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<Publisher> SearchPublisher(string query)
+        {
+            try
+            {
+                var publishers = _dbContext.Publishers.Where(o => o.Name.Contains(query)).ToList();
+                if (publishers != null)
+                {
+                    return publishers;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

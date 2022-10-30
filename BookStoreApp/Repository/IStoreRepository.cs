@@ -15,5 +15,6 @@ namespace Repository
         void CreateNewStore(Store store);
         void UpdateStore(Store store);
         List<Store> GetStoresNoDes();
+        List<Store> SearchStore(string query);
     }
 }

@@ -18,6 +18,8 @@ namespace Repository
 
         public void RemovePublisher(int id) => PublisherDAO.Instance.RemovePublisher(id);
 
+        public List<Publisher> SearchPublisher(string query) => PublisherDAO.Instance.SearchPublisher(query);
+
         public void UpdatePublisher(Publisher publisher) => PublisherDAO.Instance.UpdatePublisher(publisher);
     }
 }

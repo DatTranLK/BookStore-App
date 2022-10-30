@@ -3,46 +3,49 @@
 
 @if (Model.Role == "3")
 {
+
     <section class="product_section layout_padding">
-        <div class="container">
-            <div class="row list-wrapper">
+        <div class="justify-content-start">
+             <div style="margin-bottom: 10px;">
+                <h1>Book In Store</h1>
+                <div class="row justify-content-start">
+                    <form class="form-inline" method="post">
+                        <div class="form-group">
+                            <input asp-for="SearchString" type="text" style="margin-right: 30px; padding: 5px; width: 650px;" placeholder="Search by Book,Amount ..." />
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row justify-content-start">
                 @foreach (var item in Model.BookInStore)
                 {
-                    <div class="list-item card col-md-4" style="width: 18rem;">
-                        <div style="width: 100%; height: 60%">
-                            <img class="card-img-top" src="@item.Book.Avatar" style="width: 100%; height: 100%" alt="Card image cap">
-                        </div>
-                        <div class="card-body" style="width: 100%; height: 25%">
-
-                            <a asp-page="/BookDetailPage" asp-route-id="@item.Id">
-                                @Html.DisplayFor(modelItem => item.Book.Name)
-                            </a>
-
-                            <p class="card-text">@Html.DisplayFor(modelItem => item.Book.Price)</p>
-
-                        </div>
-                        @if (@Model.Username != null)
-                        {
-                            <div style="padding-bottom: 30px">
-                                <a class="btn btn-warning" asp-page="./CartSeller" asp-route-id="@item.Book.Id">
+                    <div class="col-3 d-flex align-items-stretch">
+                        <div class="card" style="width: 300px; margin-bottom: 5px">
+                            <div>
+                                <img class="card-img-top" src="@item.Book.Avatar" alt="Card image cap" style=" width : 280px; height : 320px; justify-content: center;">
+                            </div>
+             
+                            <div class="card-body">
+                            <p class="card-title">@Html.DisplayFor(modelItem => item.Book.Name)</p>
+                            <p class="card-text">Author: @Html.DisplayFor(modelItem => item.Book.Author)</p>
+                            <p class="card-text">Amount: @Html.DisplayFor(modelItem => item.Amount)</p>
+                            <b class="card-text">Price: @Html.DisplayFor(modelItem => item.Book.Price)</b>
+                            </div>
+                            <div style="text-align: center; margin-bottom:20px;" class="card-footer">
+                                <a class="btn btn-primary" asp-page="./CartSeller" asp-route-id="@item.Book.Id">
                                     Add To Cart
                                 </a>
                             </div>
-                        }
-                        else
-                        {
-
-                            <div style="padding-bottom: 30px">
-                                <a asp-page="/Login/LoginPage" class="btn btn-warning">
-                                    Add To Cart
-                                </a>
-                            </div>
-                        }
+                            
+                        </div>
+                    
                     </div>
+             
                 }
             </div>
             <div id="pagination-container"></div>
         </div>
-
     </section>
 }

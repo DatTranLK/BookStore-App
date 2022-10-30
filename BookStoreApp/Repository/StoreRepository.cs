@@ -20,6 +20,8 @@ namespace Repository
 
         public void RemoveStore(int id) => StoreDAO.Instance.RemoveStore(id);
 
+        public List<Store> SearchStore(string query) => StoreDAO.Instance.SearchStore(query);
+
         public void UpdateStore(Store store) => StoreDAO.Instance.UpdateStore(store);
     }
 }

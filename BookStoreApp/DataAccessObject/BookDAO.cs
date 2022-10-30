@@ -138,6 +138,28 @@ namespace DataAccessObject
             return null;
         }
 
-
+        public List<Book> SearchBook(string searchString)
+        {
+            try
+            {
+                var books = _dbContext.Books.Where(o => o.Name.Contains(searchString)
+                || o.Isbn.Contains(searchString) 
+                || o.Price.ToString().Contains(searchString) 
+                || o.Author.Contains(searchString))
+                    .Include(x => x.Category)
+                    .Include(x => x.Publisher)
+                    .OrderByDescending(x => x.Id)
+                    .ToList();
+                if (books != null)
+                {
+                    return books;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

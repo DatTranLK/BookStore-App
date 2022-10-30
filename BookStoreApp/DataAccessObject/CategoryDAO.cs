@@ -118,5 +118,24 @@ namespace DataAccessObject
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<Category> SearchCategory(string searchString)
+        {
+            try
+            {
+                var cates = _dbContext.Categories.Where(o => o.Name.Contains(searchString))
+                    .OrderByDescending(x => x.Id).ToList();
+                if (cates != null)
+                {
+                    return cates;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

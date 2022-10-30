@@ -134,5 +134,25 @@ namespace DataAccessObject
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<Store> SearchStore(string query)
+        {
+            try
+            {
+                var lst = _dbContext.Stores.Where(o => o.Name.Contains(query) 
+                || o.Address.Contains(query))
+                    .OrderByDescending(x => x.Id).ToList();
+                if (lst != null)
+                {
+                    return lst;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

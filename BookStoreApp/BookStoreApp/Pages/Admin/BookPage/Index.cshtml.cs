@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repository;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BookStoreApp.Pages.Admin.BookPage
 {
@@ -25,6 +26,8 @@ namespace BookStoreApp.Pages.Admin.BookPage
         public IList<Store> Store { get; set; }
         public Account Account { get; set; }
         public string Msg { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
         public void OnGet()
         {
             Username = HttpContext.Session.GetString("Username");
@@ -39,6 +42,11 @@ namespace BookStoreApp.Pages.Admin.BookPage
             if (Book == null)
             {
                 Msg = "There is no book in here";
+            }
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                List<Book> bookSearchList = _bookRepository.SearchBook(SearchString.Trim()).ToList();
+                Book = bookSearchList;
             }
         }
         public IActionResult OnGetLogout()

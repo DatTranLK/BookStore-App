@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DataAccessObject
 {
@@ -99,7 +100,6 @@ namespace DataAccessObject
                 var accounts = _dBContext.Accounts
                     .Include(x => x.Role)
                     .Include(x => x.Store)
-                    .OrderByDescending(x => x.Id)
                     .ToList();
                 if (accounts != null)
                 {
@@ -224,6 +224,27 @@ namespace DataAccessObject
                 throw new Exception(e.Message);
             }
             return false;
+        }
+
+        public List<Account> SearchAccount(String searchString)
+        {
+            try
+            {
+                List<Account> accountList = new List<Account>();
+                accountList = _dBContext.Accounts.Where(o => o.Name.Contains(searchString) 
+                || o.Phone.Contains(searchString) 
+                || o.Username.Contains(searchString)
+                || o.Id.ToString().Contains(searchString)).ToList();
+     
+
+                return accountList;
+   
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+           
         }
     }
 }
