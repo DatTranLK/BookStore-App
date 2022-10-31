@@ -38,6 +38,7 @@ namespace DataAccessObject
                 var lst = _dbContext.BookInStores.Where(x => x.StoreId == storeId)
                     .Include(x => x.Store)
                     .Include(x => x.Book)
+                    .Include(x => x.Book.Category)
                     .OrderByDescending(x => x.Id)
                     .ToList();
                 if (lst != null)

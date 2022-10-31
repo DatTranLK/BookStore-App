@@ -24,7 +24,7 @@ namespace BookStoreApp.Pages.Seller
             _storeRepository = storeRepository;
         }
 
-        public IList<BookInStore> BookInStore { get; set; }
+        public  IList<BookInStore>  BookInStore { get; set; }
         public IList<Store> Store { get; set; }
         public Account Account { get; set; }
         public string Msg { get; set; }
@@ -32,7 +32,7 @@ namespace BookStoreApp.Pages.Seller
 
         [BindProperty(SupportsGet = true)]
         public string? SearchString { get; set; }
-        public void OnGet()
+        public async Task OnGetAsync()
         {
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");

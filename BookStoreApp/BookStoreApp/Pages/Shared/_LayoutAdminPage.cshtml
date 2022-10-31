@@ -75,6 +75,12 @@
             <!-- Nav Item - Dashboard -->
             <!-- Divider -->
             <hr class="sidebar-divider">
+                        <li class="nav-item" style="color: white">
+                <a class="nav-link"asp-page="/Admin/ReportAdmin/ReportAdmin">
+                    <i style="color: white" class="fas fa-fw fa-file"></i>
+                    <span>Report</span>
+                </a>
+            </li>
 
             <!-- Heading -->
             <div class="sidebar-heading">
@@ -256,12 +262,7 @@
 
                     <!-- Page Heading -->
                     <!-- Content Row -->
-                    <div class="row">
-                        @*<div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Books</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                        class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                        </div>*@
+                    <div>
                         @RenderBody()
                     </div>
 
