@@ -58,46 +58,13 @@
                             </ul>
 
                         }
-
-                        @if (Context.Session.GetString("Role") == "1" && Context.Session.GetString("Username") != null)
-                        {
-                            <ul class="navbar-nav" style="color: Black">
-
-                                <li class="nav-item">
-                                    <p style="color: black">Welcome, Admin</p>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" style="color: Black" asp-page="/Index" asp-page-handler="Logout">Logout</a>
-                                </li>
-                            </ul>
-                        }
-                        @if (Context.Session.GetString("Role") == "2" && Context.Session.GetString("Username") != null)
-                        {
-                            <ul class="navbar-nav" style="color: Black">
-                                <li class="nav-item">
-                                    <p style="color: black">Welcome, Importer</p>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" style="color: Black" asp-page="/Index" asp-page-handler="Logout">Logout</a>
-                                </li>
-                            </ul>
-                        }
-                        @if (Context.Session.GetString("Role") == "3" && Context.Session.GetString("Username") != null)
-                        {
-                            <ul class="navbar-nav" style="color: Black">
-                                <li class="nav-item" style="padding: 5px; font-weight: bold; text-transform: uppercase;">
-                                    <p style="color: black">Welcome, Seller</p>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" style="color: Black" asp-page="/Index" asp-page-handler="Logout">Logout</a>
-                                </li>
-                            </ul>
-                        }
                         @if (Context.Session.GetString("Role") == "4" && Context.Session.GetString("Username") != null)
                         {
                             <ul class="navbar-nav" style="color: Black">
                                 <li class="nav-item" style="padding: 5px; font-weight: bold; text-transform: uppercase;">
-                                    <p style="color: black">Welcome, Customer</p>
+                                    <a asp-page="/Profile/Profile" asp-route-id="@Context.Session.GetString("CusID")">
+                                    <p style="color: gold">Welcome, @Context.Session.GetString("Username")</p>
+                                    </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" style="color: Black" asp-page="/MyOrders/Index">My Orders</a>

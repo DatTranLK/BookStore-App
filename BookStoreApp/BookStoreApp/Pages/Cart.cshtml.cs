@@ -41,6 +41,7 @@ namespace BookStoreApp.Pages
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
             cartCus = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cartCus");
+
             var book = _bookRepository.GetBookById(id);
             if (cartCus == null)
             {
@@ -143,6 +144,7 @@ namespace BookStoreApp.Pages
             order.StaffId = null;
             order.ShippingAddress = ShippingAddressString;           
             order.TotalPrice = total;
+            order.OrderStatus = "In process";
             int orderId = _orderRepository.CreateNewOrder(order);
             for (int i = 0; i < cartCus.Count; i++)
             {

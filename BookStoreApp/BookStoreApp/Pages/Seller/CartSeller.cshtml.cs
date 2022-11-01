@@ -167,6 +167,7 @@ namespace BookStoreApp.Pages.Seller
             order.StaffId = (int)Account.Id;
             order.ShippingAddress = null;
             order.TotalPrice = total;
+            order.OrderStatus = "Done";
             int orderId = _orderRepository.CreateNewOrder(order);
             for (int i = 0; i < cartSeller.Count; i++)
             {

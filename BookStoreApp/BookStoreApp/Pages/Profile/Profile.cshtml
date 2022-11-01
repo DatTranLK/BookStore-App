@@ -1,0 +1,34 @@
+﻿@page
+@model BookStoreApp.Pages.Profile.ProfileModel
+@{
+}
+<link rel="stylesheet" href="~/css/ProfileStyle.css">
+
+    <div class="wrap">
+        <div class="wrapper">
+            <div class="img-area">
+                <div class="inner-area">
+                    <img src="@Model.AccountInfo.Avatar"
+                     alt="twitter" />
+                </div>
+            </div>
+            <div class="name">@Model.AccountInfo.Name</div>
+            <div class="career">@Model.AccountInfo.Phone</div>
+            <hr class="horizon" />
+            <div class="info">
+                <p>User Name: @Model.AccountInfo.Username</p>
+                <p>Password: @Model.AccountInfo.Password</p>
+                <p></p>
+                <p></p>
+                <p>Date of birth: @Model.AccountInfo.DateOfBirth</p>
+                <p>Address:  @Model.AccountInfo.Address</p>
+                <p>Role: @Model.AccountInfo.Role.Name</p>
+            </div>
+            <p class="flow"> <a asp-page="./EditProfile" asp-route-id="@Model.AccountInfo.Id">Edit</a></p>
+
+           
+           
+        </div>
+    </div>    
+
+}

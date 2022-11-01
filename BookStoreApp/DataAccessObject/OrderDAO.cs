@@ -57,7 +57,6 @@ namespace DataAccessObject
         {
             try
             {
-                order.OrderStatus = "In process";
                 _dbContext.Orders.Add(order);
                 _dbContext.SaveChanges();
 

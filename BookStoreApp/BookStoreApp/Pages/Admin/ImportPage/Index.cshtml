@@ -3,6 +3,7 @@
 
 @if (@Model.Role == "1")
 {
+    <div class="row">
     @foreach (var item in Model.Book)
     {
         <div class="col-md-2 list-item" style="margin: 10px;">
@@ -19,6 +20,8 @@
             </div>
         </div>
     }
+    </div>
+
    
 }
 else

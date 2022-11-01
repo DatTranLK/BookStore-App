@@ -35,8 +35,8 @@ namespace BookStoreApp.Pages.Admin.BookInStorePage
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
             Store = _storeRepository.GetStoresNoDes();
-            ViewData["BookId"] = new SelectList(_context.Books, "Id", "Id");
-            ViewData["StoreId"] = new SelectList(_context.Stores, "Id", "Id");
+            ViewData["BookId"] = new SelectList(_context.Books, "Id", "Name");
+            ViewData["StoreId"] = new SelectList(_context.Stores, "Id", "Name");
             return Page();
         }
 
@@ -54,7 +54,8 @@ namespace BookStoreApp.Pages.Admin.BookInStorePage
             _context.BookInStores.Add(BookInStore);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Admin/BookPage/Index");
+
         }
     }
 }
