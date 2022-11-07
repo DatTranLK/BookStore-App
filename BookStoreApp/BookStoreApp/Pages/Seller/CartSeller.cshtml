@@ -16,20 +16,20 @@
     </tr>
     @foreach (var item in Model.cartSeller)
     {
-        Model.Total += item.Book.Price * item.Quantity;
+        Model.Total += item.BookInStore.Book.Price * item.Quantity;
         <tr>
-            <td>@item.Book.Id</td>
-            <td>@item.Book.Name</td>
-            <td><img src="@item.Book.Avatar" width="120" height="100" /></td>
-            <td>@item.Book.Price</td>
+            <td>@item.BookInStore.Book.Id</td>
+            <td>@item.BookInStore.Book.Name</td>
+            <td><img src="@item.BookInStore.Book.Avatar" width="120" height="100" /></td>
+            <td>@item.BookInStore.Book.Price</td>
             <td>@item.Quantity</td>
-            <td>@(item.Book.Price * item.Quantity)</td>
+            <td>@(item.BookInStore.Book.Price * item.Quantity)</td>
             <td>
-                <a asp-page="cartSeller" asp-page-handler="delete" asp-route-id="@item.Book.Id">X</a>
+                <a asp-page="cartSeller" asp-page-handler="delete" asp-route-id="@item.BookInStore.Book.Id">X</a>
             </td>
             <td>
-                <a class="btn btn-outline-secondary" asp-page="cartSeller" asp-page-handler="increase" asp-route-id="@item.Book.Id"><i class="fas fa-fw fa-plus"></i></a>
-                <a class="btn btn-outline-secondary" asp-page="cartSeller" asp-page-handler="decrease" asp-route-id="@item.Book.Id"><i class="fas fa-fw fa-minus"></i></a>
+                <a class="btn btn-outline-secondary" asp-page="cartSeller" asp-page-handler="increase" asp-route-id="@item.BookInStore.Book.Id"><i class="fas fa-fw fa-plus"></i></a>
+                <a class="btn btn-outline-secondary" asp-page="cartSeller" asp-page-handler="decrease" asp-route-id="@item.BookInStore.Book.Id"><i class="fas fa-fw fa-minus"></i></a>
             </td>
         </tr>
     }

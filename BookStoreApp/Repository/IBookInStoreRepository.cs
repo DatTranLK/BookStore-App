@@ -15,6 +15,6 @@ namespace Repository
         void UpdateBookInStore(BookInStore bookInStore, Book bookById);
         bool ImportBookToStore(int amount, int storeId, int bookId);
         List<BookInStore> SearchBookInstore(string query);
-
+        BookInStore GetBookInStoreByBookId(int bookId);
     }
 }

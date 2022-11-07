@@ -14,6 +14,8 @@ namespace Repository
 
         public BookInStore GetBookInStore(int id) => BookInStoreDAO.Instance.GetBookInStore(id);
 
+        public BookInStore GetBookInStoreByBookId(int bookId) => BookInStoreDAO.Instance.GetBookInStoreByBookId(bookId);
+
         public List<BookInStore> GetBookInStores(int storeId) => BookInStoreDAO.Instance.GetBookInStores(storeId);
 
         public bool ImportBookToStore(int amount, int storeId, int bookId) => BookInStoreDAO.Instance.ImportBookToStore(amount, storeId, bookId);

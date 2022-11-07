@@ -17,19 +17,21 @@ namespace BookStoreApp.Pages.Seller
         private readonly IOrderRepository _orderRepository;
         private readonly IOrderDetailRepository _orderDetailRepository;
         private readonly IStoreRepository _storeRepository;
+        private readonly IBookInStoreRepository _bookInStoreRepository;
 
         public CartSellerModel(IAccountRepository accountRepository, IBookRepository bookRepository, 
-            IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository, IStoreRepository storeRepository)
+            IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository, IStoreRepository storeRepository, IBookInStoreRepository bookInStoreRepository)
         {
             _accountRepository = accountRepository;
             _bookRepository = bookRepository;
             _orderRepository = orderRepository;
             _orderDetailRepository = orderDetailRepository;
             _storeRepository = storeRepository;
+            _bookInStoreRepository = bookInStoreRepository;
         }
         public string Username { get; set; }
         public string Role { get; set; }
-        public List<Item> cartSeller { get; set; }
+        public List<ItemBookInStore> cartSeller { get; set; }
         public Book Book { get; set; }
         public Account Account { get; set; }
         public int StoreId { get; set; }
@@ -43,15 +45,15 @@ namespace BookStoreApp.Pages.Seller
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
-            cartSeller = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cartSeller");
+            cartSeller = SessionHelper.GetObjectFromJson<List<ItemBookInStore>>(HttpContext.Session, "cartSeller");
             Store = _storeRepository.GetStoresNoDes();
-            var book = _bookRepository.GetBookById(id); 
+            var book = _bookInStoreRepository.GetBookInStoreByBookId(id); 
             if (cartSeller == null)
             {
-                cartSeller = new List<Item>();
-                cartSeller.Add(new Item
+                cartSeller = new List<ItemBookInStore>();
+                cartSeller.Add(new ItemBookInStore
                 {
-                    Book = book,
+                    BookInStore = book,
                     Quantity = 1
                 });
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cartSeller", cartSeller);
@@ -61,9 +63,9 @@ namespace BookStoreApp.Pages.Seller
                 int index = Exists(cartSeller, id);
                 if (index == -1)
                 {
-                    cartSeller.Add(new Item
+                    cartSeller.Add(new ItemBookInStore
                     {
-                        Book = book,
+                        BookInStore = book,
                         Quantity = 1
                     });
                 }
@@ -76,11 +78,14 @@ namespace BookStoreApp.Pages.Seller
             }
         }
 
-        private int Exists(List<Item> cart, int id)
+        private int Exists(List<ItemBookInStore> cart, int id)
         {
+            Username = HttpContext.Session.GetString("Username");
+            Role = HttpContext.Session.GetString("Role");
+            Account = _accountRepository.GetAccountByUsername(Username);
             for (int i = 0; i < cart.Count; i++)
             {
-                if (cart[i].Book.Id == id)
+                if (cart[i].BookInStore.BookId == id && cart[i].BookInStore.StoreId == Account.StoreId)
                 {
                     return i;
                 }
@@ -93,7 +98,7 @@ namespace BookStoreApp.Pages.Seller
             Username = HttpContext.Session.GetString("Username");
             Role = HttpContext.Session.GetString("Role");
             Account = _accountRepository.GetAccountByUsername(Username);
-            cartSeller = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cartSeller");
+            cartSeller = SessionHelper.GetObjectFromJson<List<ItemBookInStore>>(HttpContext.Session, "cartSeller");
             HttpContext.Session.GetString("storeId");
             int index = Exists(cartSeller, id);
             cartSeller.RemoveAt(index);
@@ -107,7 +112,7 @@ namespace BookStoreApp.Pages.Seller
             Account = _accountRepository.GetAccountByUsername(Username);
             Store = _storeRepository.GetStoresNoDes();
 
-            cartSeller = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cartSeller");
+            cartSeller = SessionHelper.GetObjectFromJson<List<ItemBookInStore>>(HttpContext.Session, "cartSeller");
             int index = Exists(cartSeller, id);
             cartSeller[index].Quantity++;
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cartSeller", cartSeller);
@@ -120,7 +125,7 @@ namespace BookStoreApp.Pages.Seller
             Account = _accountRepository.GetAccountByUsername(Username);
             Store = _storeRepository.GetStoresNoDes();
 
-            cartSeller = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cartSeller");
+            cartSeller = SessionHelper.GetObjectFromJson<List<ItemBookInStore>>(HttpContext.Session, "cartSeller");
             int index = Exists(cartSeller, id);
             cartSeller[index].Quantity--;
             if (cartSeller[index].Quantity <= 0)
@@ -142,7 +147,7 @@ namespace BookStoreApp.Pages.Seller
                 result = total;
             
 
-            cartSeller = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cartSeller");
+            cartSeller = SessionHelper.GetObjectFromJson<List<ItemBookInStore>>(HttpContext.Session, "cartSeller");
             int staffId = _accountRepository.GetIdByUsername(Username);
             var order = new Order();
             order.CreateDate = DateTime.Now;
@@ -171,7 +176,7 @@ namespace BookStoreApp.Pages.Seller
             int orderId = _orderRepository.CreateNewOrder(order);
             for (int i = 0; i < cartSeller.Count; i++)
             {
-                _orderDetailRepository.AddNewOrderDetailForSeller(cartSeller[i].Quantity, orderId, (int)Account.StoreId, cartSeller[i].Book.Id);
+                _orderDetailRepository.AddNewOrderDetailForSeller(cartSeller[i].Quantity, orderId, cartSeller[i].BookInStore.Id, (int)cartSeller[i].BookInStore.BookId);
             }
             cartSeller.Clear();
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cartSeller", cartSeller);

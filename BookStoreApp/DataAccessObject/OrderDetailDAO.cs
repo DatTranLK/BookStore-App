@@ -67,18 +67,14 @@ namespace DataAccessObject
                 orderDetail.OrderId = orderId;
                 _dbContext.OrderDetails.Add(orderDetail);
                 _dbContext.SaveChanges();
-                BookInStore book = _dbContext.BookInStores.FirstOrDefault(x => x.StoreId == StoreId && x.BookId == bookId) ;
+                BookInStore book = _dbContext.BookInStores.FirstOrDefault(x => x.Id == StoreId && x.BookId == bookId) ;
                 if (book != null)
                 {
-                    Console.WriteLine("quantity: " + quantity);
-                    Console.WriteLine("Bookid: " + book.Id);
-                    Console.WriteLine("book in store amount: " + book.Amount);
                     book.Amount -= quantity;
                     _dbContext.ChangeTracker.Clear();
                     _dbContext.Entry<BookInStore>(book).State = EntityState.Modified;
                     _dbContext.SaveChanges();
                     book = _dbContext.BookInStores.FirstOrDefault(x => x.StoreId == StoreId && x.BookId == bookId);
-                    Console.WriteLine("book in store amount: " + book.Amount);
                 }
                 _dbContext.SaveChanges();
             }

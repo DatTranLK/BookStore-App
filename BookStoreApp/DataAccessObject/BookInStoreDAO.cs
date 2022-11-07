@@ -149,5 +149,25 @@ namespace DataAccessObject
         {
             throw new NotImplementedException();
         }
+        public BookInStore GetBookInStoreByBookId(int bookId)
+        {
+            try
+            {
+                var book = _dbContext.BookInStores
+                    .Include(x => x.Book)
+                    .Include(x => x.Store)
+                    .FirstOrDefault(x => x.BookId == bookId);
+                if (book != null)
+                {
+                    return book;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
